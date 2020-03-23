@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div.container {
+            display: flex;
+        }
+
+        .flex-item {
+            flex: 1;
+            flex-basis: 300px;
+        }
+
+        div.flex-item:nth-child(1) {
+            /* flex-grow: 1;*/
+            flex-shrink: 1;
+            /*TODO: experiment with flex-grow/flex-shirk*/
+            background-color: red;
+        }
+
+        div.flex-item:nth-child(2) {
+            flex-shrink: 2;
+            background-color: green;
+        }
+
+        div.flex-item:nth-child(3) {
+            flex-shrink: 1;
+            background-color: blue;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="flex-item" id="flex-first">First</div>
+        <div class="flex-item" id="flex-second">Second</div>
+        <div class="flex-item" id="flex-third">Third</div>
+    </div>
+
+    <p>Resize the browser window to fire the <code>resize</code> event.</p>
+    <p>Window height: <span id="height"></span></p>
+    <p>Window width: <span id="width"></span></p>
+    <section>
+        <table border="0">
+            <tr>
+                <th></th>
+                <th>First</th>
+                <th>Second</th>
+                <th>Third</th>
+            </tr>
+            <tr>
+                <td>w (in pixels)</td>
+                <td id="firstW"></td>
+                <td id="secondW"></td>
+                <td id="thirdW"></td>
+            </tr>
+            <tr>
+                <td>h (in pixels)</td>
+                <td id="firstH"></td>
+                <td id="secondH"></td>
+                <td id="thirdH"></td>
+            </tr>
+            <tr>
+                <td>%</td>
+                <td id="firstR"></td>
+                <td id="secondR"></td>
+                <td id="thirdR"></td>
+            </tr>
+        </table>
+    </section>
+    <script>
+        const heightOutput = document.querySelector('#height');
+        const widthOutput = document.querySelector('#width');
+
+        function getSum(total, num) {
+            return total + num;
+        }
+
+        function reportWindowSize() {
+            heightOutput.textContent = window.innerHeight;
+            widthOutput.textContent = window.innerWidth;
+            const ids = ["#flex-first", "#flex-second", "#flex-third"];
+            let widths = [];
+            let heights = [];
+            ids.forEach(id => {
+                const elem = document.querySelector(id);
+                const props = window.getComputedStyle(elem);
+                const w = props.getPropertyValue("width");
+                widths.push(parseInt(w));
+                const h = props.getPropertyValue("height");
+                heights.push(h);
+            })
+
+            const tdIdsW = ["#firstW", "#secondW", "#thirdW"];
+            let i = 0;
+            tdIdsW.forEach(id => {
+                const elem = document.querySelector(id);
+                elem.textContent = `${widths[i]}`;
+                i++;
+            })
+            const tdIdsH = ["#firstH", "#secondH", "#thirdH"];
+            i = 0;
+            tdIdsH.forEach(id => {
+                const elem = document.querySelector(id);
+                elem.textContent = `${heights[i]}`;
+                i++;
+            })
+            const add = (a, b) => a + b
+            // use reduce to sum our array
+            const sumW = parseInt(widths.reduce(add))
+            console.log(widths, sumW);
+            i = 0;
+            const tdIds2 = ["#firstR", "#secondR", "#thirdR"];
+            tdIds2.forEach(id => {
+                const elem = document.querySelector(id);
+                // console.log(widths[i], sumW)
+                const perc = parseInt(widths[i]) / sumW * 100;
+                // console.log(perc)
+                elem.textContent = `${Math.round(perc)}`;
+                i++;
+            })
+
+            // Here is how flex-shrink is calculated:
+            const elem = document.querySelector(".flex-item");
+            const props = window.getComputedStyle(elem);
+            const flexBasis = parseInt(props.getPropertyValue("flex-basis"));
+            const flexShrinkElem = document.querySelector("div.flex-item:nth-child(2)");
+            const flexShrink = parseInt(window.getComputedStyle(flexShrinkElem).getPropertyValue("flex-shrink"));
+            const newBasis =(sumW)/3;
+            const shrinkable = flexBasis - newBasis;
+            const shrinkedValue =newBasis-shrinkable/flexShrink;
+            console.log(`flexBasis ${flexBasis} vs. ${sumW}`)
+            console.log(`if ${flexBasis*3}<=${sumW}: flex-item have the same width despite of flow-shrink.`);
+            console.log(`Otherwise (${sumW})/3=${newBasis}: is the "new basis"`);
+            console.log(`The delta to the desired width is ${flexBasis}-${newBasis}=${shrinkable}, and flex-item is shrinked based on this info`)            
+            console.log(`${newBasis}-${shrinkable}/${flexShrink}=${shrinkedValue}, and flex-item is shrinked based on this info`)            
+
+
+            // flex-basis: 300px
+
+        }
+        window.onresize = reportWindowSize;
+    </script>
+
+</body>
+
+</html>
