@@ -1,0 +1,30 @@
+body {
+    width: 100vw;
+    height: 100wh;
+    text-align: center;
+}
+
+#a {
+    background-color: blue;
+}
+
+#b {
+    background-color: green;
+}
+
+#c {
+    background-color: red;
+}
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.boxes {
+    display: flex;
+    box-sizing: border-box;
+    width: 33.3vw;
+    height: 50vh;
+    border: 1px solid yellow;
+}

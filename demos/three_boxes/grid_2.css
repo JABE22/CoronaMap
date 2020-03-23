@@ -1,0 +1,32 @@
+body { 
+    width: 100vw;
+    height: 100wh;
+    text-align: center;
+}
+
+#container {
+    display: grid;
+    grid-template-areas: 
+      "left center"
+      "right right";
+}
+
+#a {
+    grid-area: right;
+    background-color: blue;
+}
+
+#b {
+    grid-area: center;
+    background-color: green;
+}
+
+#c {
+    grid-area: left;
+    background-color: red;
+}
+
+.boxes {
+    height: 50vh;
+    border: 1px solid yellow;
+}
