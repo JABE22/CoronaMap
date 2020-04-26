@@ -80,3 +80,4 @@ const getColor = (confirmed, deaths) => {
     `This is how you can use the configuration object: ${config.baseURL}`
   );
 })();
+var map = new Datamap({element: document.getElementById('map-container')});
