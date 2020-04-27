@@ -24,7 +24,7 @@ body {
 }
 
 #map-container {
-	#flex-basis: auto;
+	flex-basis: auto;
 	align-items: center;
     justify-content: center;
 	display: flex;
