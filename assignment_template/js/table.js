@@ -111,7 +111,7 @@ function inputHandler(e) {
   let country = document.getElementById("country").value;
   console.log(codeMap[country]);
   console.log(caseMap[codeMap[country]]);
-  colorNeighbors(codeMap[country]);
+  
   if (codeMap[country]!=undefined){
 	  document.getElementsByTagName("tbody")[0].innerHTML = "";
 	  if (countryarr.includes(constructTableRow(codeMap[country]))) {
@@ -122,10 +122,15 @@ function inputHandler(e) {
 	  else {
 		countryarr.unshift(constructTableRow(codeMap[country]));
 	  }
+	  colorNeighbors(codeMap[country]);
+	  printTable();
     document.getElementById("country").value="";
   }
   console.log(countryarr);
-  printTable();
+  /*setTimeout(function(){
+    printTable();
+  }, 2000);*/
+  
 }
 
 function printTable() {
