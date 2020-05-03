@@ -38,7 +38,7 @@
       <datalist id="searchresults"></datalist>
     </form>
 
-    <div class="table-wrapper-scroll-y my-custom-scrollbar" style="margin: 20px">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar" id="tablecont" style="margin: 20px">
       <table class="table table-bordered table-striped mb-0" id="stats">
         <thead>
           <tr>
@@ -52,8 +52,9 @@
         </tbody>
       </table>
     </div>
-      
-    <div id="map-container"></div>
+    <div id="containerofmap">  
+		<div id="map-container"></div>
+	</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -73,22 +74,24 @@
     <script src="./js/config.js"></script>
     <script src="./js/index.js"></script>
     <script src="./js/table.js"></script>
+	<script src="./js/datamapping.js"></script>
+	<script src="./js/neighbours.js"></script>
 
     <script>
       
       let codeMap, caseMap;
-      
-      (async () => {
-        const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
-        codeMap = countryCodeMap(countries, INITIAL_CODES);
-        fillDataList(codeMap);
 
-        const cases = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona');
-        caseMap = mapCasesWithCountrycodes(cases, codeMap);
+        (async () => {
+            const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
+            codeMap = countryCodeMap(countries, INITIAL_CODES);
+            fillDataList(codeMap);
 
-        document.getElementById('country').addEventListener('input', inputHandler);
-        document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
-      })();
+            const cases = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona');
+            caseMap = mapCasesWithCountrycodes(cases, codeMap);
+
+            document.getElementById('country').addEventListener('input', inputHandler);
+            document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
+        })();
     </script>
   </body>
 

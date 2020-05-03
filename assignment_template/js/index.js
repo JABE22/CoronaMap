@@ -61,10 +61,10 @@ const mapNeighbours = (rawNeighbours) => {
 const getColor = (confirmed, deaths) => {
   const denominator = confirmed + deaths == 0 ? 1 : confirmed + deaths;
   const nominator = deaths ? deaths : 0;
-  const hue = int(240 + (120 * nominator) / denominator);
+  const hue = (240 + (120 * nominator) / denominator).toFixed(0);
   const saturation = 100; //constant
 
-  let weight = int(7 * Math.log(confirmed + 20 * deaths));
+  let weight = (7 * Math.log(confirmed + 20 * deaths)).toFixed(0);
   weight = weight ? (weight > 100 ? 95 : weight) : 0;
 
   let lightness = 95 - weight;
@@ -80,4 +80,5 @@ const getColor = (confirmed, deaths) => {
     `This is how you can use the configuration object: ${config.baseURL}`
   );
 })();
-var map = new Datamap({element: document.getElementById('map-container')});
+var map = new Datamap({element: document.getElementById('map-container'), projection: 'mercator', fills: {defaultFill: DEFAULT_FILL}});
+

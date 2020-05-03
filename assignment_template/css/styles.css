@@ -32,9 +32,16 @@ body {
 }
 
 #map-container {
-    flex-basis: auto;
+    display: flex;
     align-items: center;
     justify-content: center;
+	height: 100vh;
+	width: 70vw;
+}
+#containerofmap {
     display: flex;
-    height: 90vh;
+    align-items: center;
+    justify-content: center;
+	height: 100vh;
+	width: 100vw;
 }
