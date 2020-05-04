@@ -10,7 +10,6 @@
     <script src="./lib/topojson.js"></script>
     <script src="./lib/jquery.min.js"></script>
     <script src="./lib/datamaps.world.min.js"></script>
-    <link rel="shortcut icon" href="#"> <!-- Please, do not remove this line -->
     <link rel="stylesheet" type="text/css" href="./lib/bootstrap-responsive.min.css">
     <link rel="stylesheet" type="text/css" href="./lib/bootstrap.min.css">
     <!-- Own stylesheet -->
@@ -74,12 +73,14 @@
     <!-- Own Javascript -->
     <script src="./js/config.js"></script>
     <script src="./js/index.js"></script>
-    <script src="./js/table(jarno).js"></script>
+    <script src="./js/table.js"></script>
 	<script src="./js/datamapping.js"></script>
 	<script src="./js/neighbours.js"></script>
 
     <script>
+      
       let codeMap, caseMap;
+
         (async () => {
             const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
             codeMap = countryCodeMap(countries, INITIAL_CODES);
