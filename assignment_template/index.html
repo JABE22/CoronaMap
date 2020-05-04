@@ -79,13 +79,16 @@
 
     <script>
       
-      let codeMap, caseMap;
+      let codeMap, caseMap, neighMap;
 
         (async () => {
             const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
             codeMap = countryCodeMap(countries, INITIAL_CODES);
             fillDataList(codeMap);
-
+			
+			const neighboursMapped = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours');
+			neighMap = mapNeighbours(neighboursMapped);
+			console.log(neighboursMapped);
             const cases = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona');
             caseMap = mapCasesWithCountrycodes(cases, codeMap);
 
