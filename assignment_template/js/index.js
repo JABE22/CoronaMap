@@ -44,14 +44,8 @@ const sayHello = (text) => console.log(text);
  * @returns an object where keys are three-char country codes (alpha3codes), and the values are neighbour country codes as an array.
  */
 const mapNeighbours = (rawNeighbours) => {
-	let neighbours = {};
-	for (item in rawNeighbours) {
-		neighbours[rawNeighbours[item]["alpha3Code"]] = rawNeighbours[item]["borders"];
-	}
-	return neighbours;
+  //TODO: populate the object and return it
 };
-
-const int = (str) => Number.parseInt(str);
 
 /**
  * Constructs a HSL color based on the given parameters.
@@ -67,17 +61,16 @@ const int = (str) => Number.parseInt(str);
 const getColor = (confirmed, deaths) => {
   const denominator = confirmed + deaths == 0 ? 1 : confirmed + deaths;
   const nominator = deaths ? deaths : 0;
-  const hue = int(240 + 120 * nominator / denominator);
+  const hue = (240 + (120 * nominator) / denominator).toFixed(0);
   const saturation = 100; //constant
 
-  let weight = int(7 * Math.log(confirmed + 20 * deaths));
+  let weight = (7 * Math.log(confirmed + 20 * deaths)).toFixed(0);
   weight = weight ? (weight > 100 ? 95 : weight) : 0;
 
   let lightness = 95 - weight;
   lightness = lightness < 0 ? 0 : lightness;
   return `hsl(${hue}, ${saturation}, ${lightness})`;
 };
-
 
 // Self-invoked function to avoid polluting global scope
 (() => {
@@ -88,4 +81,4 @@ const getColor = (confirmed, deaths) => {
   );
 })();
 var map = new Datamap({element: document.getElementById('map-container'), projection: 'mercator', fills: {defaultFill: DEFAULT_FILL}});
-//console.log(mapNeighbours);
+

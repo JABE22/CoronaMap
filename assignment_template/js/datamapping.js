@@ -1,20 +1,16 @@
 function colorNeighbors(countryCode) {
 	
-	
-	console.log('below da ding');
-	console.log(neighMap);
-	
 	map.updateChoropleth(null, {reset: true});
 	try {
 		map.updateChoropleth({
 			[countryCode]: getColor(caseMap[countryCode].confirmed, caseMap[countryCode].deaths)
 		});
 		
-		for (country in neighMap[countryCode]) {
+		for (country in neighbours[countryCode]) {
 			try {
-				console.log(neighMap[countryCode][country]);
+				console.log(neighbours[countryCode][country]);
 				map.updateChoropleth({
-					[neighMap[countryCode][country]]: getColor(caseMap[neighMap[countryCode][country]].confirmed, caseMap[neighMap[countryCode][country]].deaths)
+					[neighbours[countryCode][country]]: getColor(caseMap[neighbours[countryCode][country]].confirmed, caseMap[neighbours[countryCode][country]].deaths)
 				});
 			}
 			catch (error) {
