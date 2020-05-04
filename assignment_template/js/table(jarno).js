@@ -3,7 +3,7 @@
  * @author Jarno Matarmaa
  * 
  * Based on Week 6, exercise 3
- * Does not include table sort property. Will be added later if needed
+ * Including table sort property
  */
 
 /**
@@ -79,18 +79,18 @@ function constructTableRow(code) {
     var tableRow = "";
     if (caseMap[code] != undefined) {
         tableRow = "<tr>"
-                    + "<td>" + caseMap[code].country + "</td>"
-                    + "<td>" + caseMap[code].confirmed + "</td>"
-                    + "<td>" + caseMap[code].deaths + "</td>"
-                    + "<td>" + caseMap[code].recovered + "</td>"
-                 + "</tr>";
+                + "<td>" + caseMap[code].country + "</td>"
+                + "<td>" + caseMap[code].confirmed + "</td>"
+                + "<td>" + caseMap[code].deaths + "</td>"
+                + "<td>" + caseMap[code].recovered + "</td>"
+                + "</tr>";
     } else {
         tableRow = "<tr>"
-                    + "<td>" + getKey(codeMap, code) + "</td>"
-                    + "<td>-</td>"
-                    + "<td>-</td>"
-                    + "<td>-</td>"
-                 + "</tr>";
+                + "<td>" + getKey(codeMap, code) + "</td>"
+                + "<td>-</td>"
+                + "<td>-</td>"
+                + "<td>-</td>"
+                + "</tr>";
     }
     return tableRow;
 }
@@ -127,8 +127,34 @@ function mapCasesWithCountrycodes(cases, countries) {
  */
 function inputHandler(e) {
     let country = document.getElementById("country").value;
-    if (codeMap[country] !== undefined) {
-        document.querySelector("tbody").insertAdjacentHTML('afterbegin', constructTableRow(codeMap[country]));
-        document.getElementById("country").value = "";
+    var countryCode = codeMap[country]
+    var tableRow = constructTableRow(countryCode);
+
+    countryarr.sort();
+
+    if (countryCode !== undefined) {
+        document.getElementsByTagName("tbody")[0].innerHTML = "";
+        if (countryarr.includes(tableRow)) {
+            countryarr.splice(countryarr.indexOf(tableRow), 1);
+            countryarr.unshift(tableRow);
+        } else {
+            countryarr.unshift(tableRow);
+        }
+    }
+    colorNeighbors(countryCode);
+    document.getElementById("country").value = "";
+
+    printTable();
+
+}
+
+function printTable() {
+    
+    var tbody = document.getElementsByTagName("tbody")[0];
+    
+    for (i = 0; i < countryarr.length; i++) {
+        tbody.innerHTML = tbody.innerHTML + countryarr[i];
     }
 }
+
+var countryarr = [];
