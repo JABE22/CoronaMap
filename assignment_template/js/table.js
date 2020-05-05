@@ -112,11 +112,13 @@ function inputHandler(e) {
   console.log(codeMap[country]);
   console.log(caseMap[codeMap[country]]);
   
+  countryarr.sort();
+  
   if (codeMap[country]!=undefined){
 	  document.getElementsByTagName("tbody")[0].innerHTML = "";
 	  if (countryarr.includes(constructTableRow(codeMap[country]))) {
 		countryarr.splice(countryarr.indexOf(constructTableRow(codeMap[country])), 1);
-		countryarr.sort();
+		
 		countryarr.unshift(constructTableRow(codeMap[country]));
 	  }
 	  else {
