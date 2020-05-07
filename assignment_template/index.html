@@ -75,11 +75,12 @@
     <script src="./js/index.js"></script>
     <script src="./js/table.js"></script>
 	<script src="./js/datamapping.js"></script>
-	<script src="./js/neighbours.js"></script>
+  <script src="./js/neighbours.js"></script>
+  <script src="./js/timeseries.js"></script>
 
     <script>
       
-      let codeMap, caseMap, neighMap;
+      let codeMap, caseMap, neighMap, timeMap;
 
         (async () => {
             const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
@@ -89,9 +90,11 @@
 			const neighboursMapped = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours');
 			neighMap = mapNeighbours(neighboursMapped);
 			console.log(neighboursMapped);
-			
             const cases = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona');
             caseMap = mapCasesWithCountrycodes(cases, codeMap);
+
+            const timeseries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona/timeseries/');
+            timeMap = mapTimeseries(timeseries, codeMap);
 
             document.getElementById('country').addEventListener('input', inputHandler);
             document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
