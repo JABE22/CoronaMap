@@ -106,6 +106,7 @@
             timeMap = mapTimeseries(timeseries, codeMap);
 
             document.getElementById('country').addEventListener('input', inputHandler);
+			document.getElementById("timeseries").onclick = function() {timeseriesFills(timeMap);};
             document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
         })();
 

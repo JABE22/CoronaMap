@@ -39,3 +39,42 @@ function initialFills(mappedcases) {
 	}
 	
 };
+
+function timeseriesHelper(date, max) {
+	//console.log(date)
+	//console.log(date);
+	for (country in date) {
+		try {
+			map.updateChoropleth({
+				
+				[country]: getColor(date[country].confirmed, date[country].deaths)
+			});
+		}
+		catch (error) {
+			console.log("was nothing in that country");
+		}
+	}
+}
+
+function timeseriesFills(ts) {
+	var keys = Object.keys(ts);
+	var i = 0;
+	var max = keys.length;
+	var maxdate = ts[keys[max-1]];
+	//console.log(maxdate);
+	map.updateChoropleth(null, {reset: true});
+	var inte = setInterval(function(){
+		console.log(keys[i]);
+		timeseriesHelper(ts[keys[i]], maxdate);
+		if (typeof keys[i] === 'undefined') {
+			stop();
+		}
+		i++;
+	}, 200);
+	function stop() {
+		clearInterval(inte);
+	};
+}
+
+
+
