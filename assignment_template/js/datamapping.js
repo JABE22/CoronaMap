@@ -58,7 +58,6 @@ function initialFills(mappedcases) {
 	}
 	
 };
-<<<<<<< HEAD
 
 /**
  * timeseriesHelper colors the countries with their corona stats.
@@ -118,6 +117,3 @@ function timeseriesFills(ts) {
 	};
 }
 
-
-=======
->>>>>>> parent of 0ee0d84... add timeseries filling
