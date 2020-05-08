@@ -81,15 +81,13 @@
     <script src="./js/config.js"></script>
     <script src="./js/index.js"></script>
     <script src="./js/table.js"></script>
-    <script src="./js/datamapping.js"></script>
-    <script src="./js/neighbours.js"></script>
+	<script src="./js/datamapping.js"></script>
+  <script src="./js/neighbours.js"></script>
+  <script src="./js/timeseries.js"></script>
 
     <script>
-              let codeMap, caseMap, neighMap;
-              (async () => {
-                  const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
-                  codeMap = countryCodeMap(countries, INITIAL_CODES);
-                  fillDataList(codeMap);
+      
+      let codeMap, caseMap, neighMap, timeMap;
 
                   const neighboursMapped = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours');
                   neighMap = mapNeighbours(neighboursMapped);
@@ -100,6 +98,12 @@
                   document.getElementById('country_searchbox').addEventListener('input', inputHandler);
                   document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
               })();
+            const timeseries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona/timeseries/');
+            timeMap = mapTimeseries(timeseries, codeMap);
+
+            document.getElementById('country').addEventListener('input', inputHandler);
+            document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
+        })();
     </script>
   </body>
 
