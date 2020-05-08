@@ -4,7 +4,7 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
 
     <script src="./lib/d3.min.js"></script>
     <script src="./lib/topojson.js"></script>
@@ -15,31 +15,35 @@
     <!-- Own stylesheet -->
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
 
-    <title>Corona</title>
+    <title>CoronaMap</title>
   </head>
-
   <body>
-    <main id="container">
+
+    <main id="header">
       <h1>Welcome to assignment!</h1>
     </main>
+    
+    <div class="img-container"><img id="tau" alt="tau-logo" src="./img/tau_logo.png"></div>
+
+    <div class="form-actions">
+      <form name="countryform" id="countryform">
+        <label id="country-label" for="country_searchbox">Give a country:</label>
+        <input type="text" name="country_searchbox" id="country_searchbox" placeholder="Country" 
+               list="searchresults" autocomplete="off">
+        <datalist id="searchresults"></datalist>
+      </form>
+      <form name="timeseriesForm" id="timeseriesForm">
+        <button class="form-button" id="timeseries" type="button">Time series</button>
+      </form>
+    </div>
+    
     <nav id="nav">
-      <a id="nav_corona">Corona</a>
-      <a id="nav_roadmap">Roadmap</a>
+      <a class="nav_button" id="nav_corona">Corona</a>
+      <a class="nav_button" id="nav_roadmap" href="roadmap.html">Roadmap</a> 
     </nav>
 
-    <form name="timeseriesForm" id="timeseriesForm">
-      <button id="timeseries" type="button">Time series</button>
-    </form>
-    
-    <form name="countryform" id="countryform">
-      <label for="country">Give a country:</label>
-      <input type="text" name="country" id="country" placeholder="Country" 
-             list="searchresults" autocomplete="off">
-      <datalist id="searchresults"></datalist>
-    </form>
-
-    <div class="table-wrapper-scroll-y my-custom-scrollbar" id="tablecont" style="margin: 20px">
-      <table class="table table-bordered table-striped mb-0" id="stats">
+    <div class="table-wrapper-scroll-y my-custom-scrollbar" id="tablecont">
+      <table class="table table-bordered table-striped mb-0" id="corona_stats">
         <thead>
           <tr>
             <th>Country</th>
@@ -52,9 +56,12 @@
         </tbody>
       </table>
     </div>
+
     <div id="containerofmap">  
-		<div id="map-container"></div>
-	</div>
+      <div id="map-container"></div>
+    </div>
+
+    <footer>Created with Passion (-: Proudly Group 9 :-)</footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -74,27 +81,25 @@
     <script src="./js/config.js"></script>
     <script src="./js/index.js"></script>
     <script src="./js/table.js"></script>
-	<script src="./js/datamapping.js"></script>
-	<script src="./js/neighbours.js"></script>
+    <script src="./js/datamapping.js"></script>
+    <script src="./js/neighbours.js"></script>
 
     <script>
-      
-      let codeMap, caseMap, neighMap;
+              let codeMap, caseMap, neighMap;
+              (async () => {
+                  const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
+                  codeMap = countryCodeMap(countries, INITIAL_CODES);
+                  fillDataList(codeMap);
 
-        (async () => {
-            const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
-            codeMap = countryCodeMap(countries, INITIAL_CODES);
-            fillDataList(codeMap);
-			
-			const neighboursMapped = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours');
-			neighMap = mapNeighbours(neighboursMapped);
-			console.log(neighboursMapped);
-            const cases = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona');
-            caseMap = mapCasesWithCountrycodes(cases, codeMap);
+                  const neighboursMapped = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours');
+                  neighMap = mapNeighbours(neighboursMapped);
+                  console.log(neighboursMapped);
+                  const cases = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona');
+                  caseMap = mapCasesWithCountrycodes(cases, codeMap);
 
-            document.getElementById('country').addEventListener('input', inputHandler);
-            document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
-        })();
+                  document.getElementById('country_searchbox').addEventListener('input', inputHandler);
+                  document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
+              })();
     </script>
   </body>
 
