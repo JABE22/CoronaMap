@@ -27,11 +27,12 @@
 
     <div class="form-actions">
       <form name="countryform" id="countryform">
-        <label id="country-label" for="country_searchbox">Give a country:</label>
-        <input type="text" name="country_searchbox" id="country_searchbox" placeholder="Country" 
-               list="searchresults" autocomplete="off">
-        <datalist id="searchresults"></datalist>
-      </form>
+      <label for="country">Give a country:</label>
+      <input type="text" name="country" id="country" placeholder="Country" 
+             list="searchresults" autocomplete="off">
+      <datalist id="searchresults"></datalist>
+    </form>
+
       <form name="timeseriesForm" id="timeseriesForm">
         <button class="form-button" id="timeseries" type="button">Time series</button>
       </form>
@@ -96,17 +97,29 @@
                   codeMap = countryCodeMap(countries, INITIAL_CODES);
                   fillDataList(codeMap);
 
-                  const neighboursMapped = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours');
-                  neighMap = mapNeighbours(neighboursMapped);
-                  console.log(neighboursMapped);
-                  const cases = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona');
-                  caseMap = mapCasesWithCountrycodes(cases, codeMap);
-                  const timeseries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona/timeseries/');
-                  timeMap = mapTimeseries(timeseries, codeMap);
+        (async () => {
+            const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
+            codeMap = countryCodeMap(countries, INITIAL_CODES);
+            fillDataList(codeMap);
+			
+			console.log("codemap");
+			console.log(codeMap);
+			
+			const neighboursMapped = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours');
+			neighMap = mapNeighbours(neighboursMapped);
+			console.log(neighboursMapped);
+            const cases = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona');
+            caseMap = mapCasesWithCountrycodes(cases, codeMap);
+			initialFills(caseMap);
 
-                  document.getElementById('country_searchbox').addEventListener('input', inputHandler);
-                  document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
-              })();
+            const timeseries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona/timeseries/');
+            timeMap = mapTimeseries(timeseries, codeMap);
+
+            document.getElementById('country').addEventListener('input', inputHandler);
+            document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
+			document.getElementById("timeseries").onclick = function() {timeseriesFills(timeMap);};
+        })();
+
     </script>
   </body>
 

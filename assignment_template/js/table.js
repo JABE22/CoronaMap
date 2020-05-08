@@ -107,7 +107,7 @@ function mapCasesWithCountrycodes(cases, countries) {
     return caseMap;
 }
 function inputHandler(e) {
-    let country = document.getElementById("country_searchbox").value;
+    let country = document.getElementById("country").value;
     console.log(codeMap[country]);
     console.log(caseMap[codeMap[country]]);
 
@@ -122,7 +122,7 @@ function inputHandler(e) {
         }
         colorNeighbors(codeMap[country]);
         printTable();
-        document.getElementById("country_searchbox").value = "";
+        document.getElementById("country").value = "";
     }
     console.log(countryarr);
     /*setTimeout(function(){

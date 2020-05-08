@@ -23,5 +23,7 @@
         }
     }
       //console.log(timeMap["5/4/20"]["FIN"]);
+	  console.log("dis the time map");
+	  console.log(timeMap);
       return timeMap;
   }
