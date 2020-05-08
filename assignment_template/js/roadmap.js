@@ -4,7 +4,6 @@
 })();
 
 function addListItem(text) {
-  // TODO: implement this function
   var todoList = document.getElementById('todo');
   let listItem = document.createElement('li');
   let label = document.createElement('label');

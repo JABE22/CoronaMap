@@ -2,14 +2,18 @@
     Created on : 8 May 2020, 11.52.53
     Author     : Jarno Ma <Tampereen Yliopisto>
 */
-/*
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-*/
+
+@keyframes opacity {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
 
 #image {
     grid-column: 1;
     grid-row: 3;
     margin-left: 4rem;
+    animation-name: opacity;
+    animation-duration: 3s;
 }
 
 .todo-controls {
@@ -100,7 +104,7 @@ cite {
 }
 
 
-/* CHECKBOXES */
+/* CHECKBOX STYLES */
 
 /* custom properties (AKA css variables) */
 .si {
@@ -193,7 +197,7 @@ span {
     transform: rotate(0deg) scale(1);
 }
 
-/* feedback when the user interacts with an element */
+/* Feedback when the user interacts with an element */
 .si .si-label:hover::before {
     border-color: var(--color-active);
 }

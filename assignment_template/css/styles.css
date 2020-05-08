@@ -53,7 +53,7 @@ nav {
     align-content: center;
 }
 
-input[name="country_searchbox"] {
+input[name="country"] {
     box-sizing: border-box;
     height: 40px;
     width: 300px;
