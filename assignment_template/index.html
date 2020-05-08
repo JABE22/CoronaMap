@@ -95,6 +95,9 @@
             codeMap = countryCodeMap(countries, INITIAL_CODES);
             fillDataList(codeMap);
 			
+			console.log("codemap");
+			console.log(codeMap);
+			
 			const neighboursMapped = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours');
 			neighMap = mapNeighbours(neighboursMapped);
 			console.log(neighboursMapped);

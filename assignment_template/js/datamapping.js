@@ -110,7 +110,7 @@ function timeseriesFills(ts) {
 			stop();
 		}
 		i++;
-	}, 200);
+	}, 400);
 	//Inner function to stop the intervalling
 	function stop() {
 		clearInterval(inte);
