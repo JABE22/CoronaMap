@@ -2,6 +2,8 @@ body {
     display: grid;
     grid-template: auto 100px auto auto auto / auto auto 50vw; /* 5 x 3 grid */
     background-color: lightgrey;
+    /* Congruent font family style for whole site */
+    font-family: Tahoma, "Trebuchet MS", Helvetica, sans-serif;
     
 }
 
@@ -12,7 +14,7 @@ body {
     min-width: 620px
 }
 
-.img-container {
+#logo {
     grid-column: 3;
     grid-row: 1;
 }
@@ -87,7 +89,6 @@ input[name="country_searchbox"] {
 
 form button, label { /* All the form elements gets the same font style */
     display: inline-block;
-    font-family: Tahoma, "Trebuchet MS", Helvetica, sans-serif;
     font-size: 18px;
 }
 
@@ -107,7 +108,6 @@ form button, label { /* All the form elements gets the same font style */
 }
 
 #corona_stats {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
@@ -148,17 +148,14 @@ form button, label { /* All the form elements gets the same font style */
     width: 80vw;
 }
 
-
-/* COPY PASTE FOR PARSING STYLES */
 h1 {
     padding: 20px;
-    font-family: Tahoma, "Trebuchet MS", Helvetica, sans-serif;
     color: black;
     font-weight: 500;
     text-shadow: 0px 0px 3px grey;
 }
 
-a {
+nav a {
     box-sizing: border-box;
     text-align: center;
     border: 1px solid;
@@ -166,12 +163,11 @@ a {
     -o-border-radius: 3px 3px 3px;
     -webkit-border-radius: 3px 3px 3px;
     -moz-border-radius: 3px 3px 3px;
-    font-family: Tahoma, "Trebuchet MS", Helvetica, sans-serif;
     background-color: #149bdf;
     cursor: pointer;
 }
 
-nav a {
+.nav_button {
     width: 150px;
     height: 45px;
     color: whitesmoke;
@@ -182,9 +178,9 @@ nav a {
 }
 
 
-a:visited { color: whitesmoke; }    /* visited link */
-a:hover { box-shadow: 0px 0px 10px rgba(255, 165, 0, .9); }     /* mouse over link */
-a:active { color: black; }     /* selected link */
+.nav_button:visited { color: whitesmoke; }    /* visited link */
+.nav_button:hover { box-shadow: 0px 0px 10px rgba(255, 165, 0, .9); }     /* mouse over link */
+.nav_button:active { color: black; }     /* selected link */
 button:visited { color: whitesmoke; }    /* visited link */
 button:hover { box-shadow: 0px 0px 10px rgba(255, 165, 0, .9); }     /* mouse over link */
 button:active { color: black; }     /* pressed link */
@@ -193,18 +189,29 @@ button:active { color: black; }     /* pressed link */
 footer {
     grid-column: 1 / span 3;
     grid-row: 5;
+    height: 8vh;
+    width: 100vw;
     display: flex;
-    align-content: center;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin-top: 20px;
     margin-bottom: 20px;
-    padding-top: 25px;
-    height: 5vh;
-    width: 100vw;
-    justify-content: center;
+    padding: 15px;
     color: whitesmoke;
-    font-family:"Calibri",Arial, Helvetica, sans-serif;
-    font-size: 20px;
     background-color: #0e90d2;
     opacity: 0.8;
+}
+
+#slogan {
+    margin: 5px;
+    font-size: 16px;
+    text-shadow: 0px 0px 2px black;
+    color: whitesmoke;
+}
+
+#developers {
+    margin: 5px;
+    font-size: 14px;
+    text-shadow: 0px 0px 2px #ddd;
+    color: #000;
 }

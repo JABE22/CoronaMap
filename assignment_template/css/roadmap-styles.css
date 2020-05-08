@@ -1,0 +1,205 @@
+/* 
+    Created on : 8 May 2020, 11.52.53
+    Author     : Jarno Ma <Tampereen Yliopisto>
+*/
+/*
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+*/
+
+#image {
+    grid-column: 1;
+    grid-row: 3;
+    margin-left: 4rem;
+}
+
+.todo-controls {
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+input[name="type-input"] {
+    box-sizing: border-box;
+    height: 40px;
+    width: 300px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 8px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 18px;
+    background-color: whitesmoke;
+    background-image: url('../img/plus-v3.png');
+    background-size: 25px 25px;
+    background-position: 5px;
+    background-repeat: no-repeat;
+    padding: 10px 10px 10px 40px;
+}
+
+.todo-container {
+    grid-column: 2 / span 3;
+    grid-row: 3;
+    width: auto;
+    margin-right: 10rem; 
+    background-color: whitesmoke;
+}
+
+#todo {
+    width: auto;
+    min-width: 300px;
+    margin-top: 2rem;
+    margin-right: 2rem;
+}
+
+h2 {
+    margin: 2rem;
+    font-size: 30px;
+    color: black;
+    font-weight: 500;
+}
+
+li:not(.ref) {
+    list-style: none;
+    border: 2px solid darkgrey;
+    margin-top: 1rem;
+    width: auto;
+    background-color: white;
+}
+
+table {
+    border-spacing: 0;
+    width: 100%;
+}
+
+.todo-container p:not(.ref) {
+    margin-left: 3rem;
+}
+
+.info_text {
+    font-size: 15px;
+    text-align: right;
+    margin-right: 2rem;
+    margin-top: 1rem;
+}
+
+.references {
+    grid-column: 2 / span 3;
+    grid-row: 4;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    margin: 30px;
+}
+
+cite {
+    font-size: 16px;
+}
+
+
+/* CHECKBOXES */
+
+/* custom properties (AKA css variables) */
+.si {
+    --color-label: black;
+    --color-default: #149bdf;
+    --color-active: #0069ff;
+    --rotate-default: 180deg;
+    --rotate-active: 40deg;
+    --border-size-checkmark: 2px;
+    --border-size-box: 2px;
+    --input-size: 20px;
+    --guter: 30px;
+}
+
+/* Basic reset */
+.si, .si *, .si *::before, .si *::after {
+    box-sizing: border-box;
+}
+
+/* Label */
+.si {
+    cursor: pointer;
+    position: relative;
+    margin: 10px; 
+}
+
+.si .si-label {
+    display: inline-block;
+    padding-left: var(--guter);
+    color: var(--color-label);
+    vertical-align: text-top;
+}
+
+span {
+    font-size: 24px;
+}
+
+/* Checkbox square */
+.si.si-checkbox .si-label::before {
+    margin-top: 5px; 
+    border-radius: var(--border-size-checkmark);
+}
+
+/* Checkbox checkmark */
+.si.si-checkbox .si-label::after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 18px;
+    border-width: 0 var(--border-size-checkmark) var(--border-size-checkmark) 0;
+    border-style: solid;
+    border-color: transparent var(--color-active) var(--color-active) transparent;
+    position: absolute;
+    top: -3px;
+    left: 0;
+    transform: rotate(var(--rotate-default)) scale(0);
+}
+
+/* Checkbox square */
+.si.si-checkbox > input:checked + .si-label::before {
+    transform: rotate(var(--rotate-active)) scale(0);
+}
+
+/* Checkmark */
+.si.si-checkbox > input:checked + .si-label::after {
+    left: 8px;
+    transform: rotate(var(--rotate-active)) scale(1);
+}
+
+.si > input:checked + .si-label.line-across {
+    text-decoration: line-through;
+}
+
+/* Change property values smoothly */
+.si .si-label::before,
+.si .si-label::after {
+    transition: all 0.2s ease-in-out;
+}
+
+/* An element for checkbox */
+.si .si-label::before {
+    content: '';
+    display: block;
+    width: var(--input-size);
+    height: var(--input-size);
+    border: var(--border-size-box) solid var(--color-default);
+    position: absolute;
+    top: -3px;
+    left: 0;
+    transform: rotate(0deg) scale(1);
+}
+
+/* feedback when the user interacts with an element */
+.si .si-label:hover::before {
+    border-color: var(--color-active);
+}
+
+.si > input { display: none; }
+
+.si > input[type="checkbox"] {
+    clip-path: polygon(0 0);
+}

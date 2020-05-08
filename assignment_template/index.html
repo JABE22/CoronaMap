@@ -61,7 +61,10 @@
       <div id="map-container"></div>
     </div>
 
-    <footer>Created with Passion (-: Proudly Group 9 :-)</footer>
+    <footer>
+      <p id="slogan">Created with Passion -Proudly Group 9-</p>
+      <p id="developers">Aino Heiskanen, Jarno Matarmaa, Niko Alanko</p>
+    </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -81,29 +84,29 @@
     <script src="./js/config.js"></script>
     <script src="./js/index.js"></script>
     <script src="./js/table.js"></script>
-	<script src="./js/datamapping.js"></script>
-  <script src="./js/neighbours.js"></script>
-  <script src="./js/timeseries.js"></script>
+    <script src="./js/datamapping.js"></script>
+<!--    <script src="./js/neighbours.js"></script> -->
+    <script src="./js/timeseries.js"></script>
+    
 
     <script>
-      
-      let codeMap, caseMap, neighMap, timeMap;
+              let codeMap, caseMap, neighMap, timeMap;
+              (async () => {
+                  const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
+                  codeMap = countryCodeMap(countries, INITIAL_CODES);
+                  fillDataList(codeMap);
 
                   const neighboursMapped = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours');
                   neighMap = mapNeighbours(neighboursMapped);
                   console.log(neighboursMapped);
                   const cases = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona');
                   caseMap = mapCasesWithCountrycodes(cases, codeMap);
+                  const timeseries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona/timeseries/');
+                  timeMap = mapTimeseries(timeseries, codeMap);
 
                   document.getElementById('country_searchbox').addEventListener('input', inputHandler);
                   document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
               })();
-            const timeseries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona/timeseries/');
-            timeMap = mapTimeseries(timeseries, codeMap);
-
-            document.getElementById('country').addEventListener('input', inputHandler);
-            document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
-        })();
     </script>
   </body>
 
