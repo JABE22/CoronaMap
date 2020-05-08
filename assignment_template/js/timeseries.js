@@ -23,5 +23,6 @@
         }
     }
       //console.log(timeMap["5/4/20"]["FIN"]);
+	  console.log(timeMap);
       return timeMap;
   }

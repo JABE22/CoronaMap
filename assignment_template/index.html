@@ -100,6 +100,7 @@
 			console.log(neighboursMapped);
             const cases = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona');
             caseMap = mapCasesWithCountrycodes(cases, codeMap);
+			initialFills(caseMap);
 
             const timeseries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona/timeseries/');
             timeMap = mapTimeseries(timeseries, codeMap);
