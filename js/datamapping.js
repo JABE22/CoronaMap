@@ -101,7 +101,9 @@ function timeseriesFills(ts) {
 	map.updateChoropleth(null, {reset: true});
 	
 	//intervalling.
+	timeseriesHelper(ts[keys[i]], maxdate);
 	inte = setInterval(function(){
+		i++;
 		console.log(keys[i]);
 		
 		//Called once per second with iterated key
@@ -112,8 +114,8 @@ function timeseriesFills(ts) {
 		}
 		timeseriesHelper(ts[keys[i]], maxdate);
 		document.getElementById("date").innerHTML = keys[i].toString();
-		i++;
-	}, 400);
+		
+	}, 1000);
 	//Inner function to stop the intervalling
 
 }
