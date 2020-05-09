@@ -102,6 +102,7 @@ function timeseriesFills(ts) {
 	
 	//intervalling.
 	timeseriesHelper(ts[keys[i]], maxdate);
+	document.getElementById("date").innerHTML = keys[i].toString();
 	inte = setInterval(function(){
 		i++;
 		console.log(keys[i]);
