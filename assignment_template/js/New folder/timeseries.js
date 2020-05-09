@@ -14,20 +14,19 @@
         }
         timeMap[date]={}
     }
+	console.log("dis the time map");
     for (date in timeMap){
         for (i=0; i<confirmed.length; i++){
-            const code = countryMap[confirmed[i]["Country/Region"].replace(/_/g, " ")];
-            if (timeMap[date][code]==undefined) {
-                timeMap[date][code]={}
-                timeMap[date][code]["confirmed"] = confirmed[i][date];
-                timeMap[date][code]["deaths"] = deaths[i][date];
-            }
-            else {
-                timeMap[date][code]["confirmed"] += confirmed[i][date];
-                timeMap[date][code]["deaths"] += deaths[i][date];
-            }
+            const code = countryMap[confirmed[i]["Country/Region"]];
+            timeMap[date][code]={}
+            timeMap[date][code]["confirmed"] = confirmed[i][date];
+            timeMap[date][code]["deaths"] = deaths[i][date];
+			
+			console.log(code);
         }
     }
       //console.log(timeMap["5/4/20"]["FIN"]);
+	  //console.log("dis the time map");
+	  //console.log(timeMap);
       return timeMap;
   }

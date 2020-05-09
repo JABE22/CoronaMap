@@ -58,8 +58,10 @@
       </table>
     </div>
 
-    <div id="containerofmap">  
-      <div id="map-container"></div>
+    <div id="containerofmap">
+      <div id="map-container">
+        <div id="date"></div>
+      </div>
     </div>
 
     <footer>
@@ -91,6 +93,12 @@
 
     <script>
               let codeMap, caseMap, neighMap, timeMap;
+			  var inte;
+			  
+			  function stop() {
+				clearInterval(inte);
+			  };
+			  
               (async () => {
                   const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
                   codeMap = countryCodeMap(countries, INITIAL_CODES);
@@ -108,8 +116,8 @@
                   document.getElementById('country').addEventListener('input', inputHandler);
                   document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
                   document.getElementById("timeseries").onclick = function () {
-                  timeseriesFills(timeMap);
-                };
+					timeseriesFills(timeMap);
+				  };
               })();
     </script>
   </body>
