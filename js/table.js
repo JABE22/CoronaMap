@@ -124,7 +124,7 @@ function inputHandler(e) {
         colorNeighbors(codeMap[country]);
         printTable();
 		var today = new Date();
-		var date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+		var date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear().toString().slice(2);
 
 		document.getElementById("date").innerHTML = date;
         document.getElementById("country").value = "";
