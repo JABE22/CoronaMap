@@ -123,6 +123,10 @@ function inputHandler(e) {
 		stop(inte);
         colorNeighbors(codeMap[country]);
         printTable();
+		var today = new Date();
+		var date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+
+		document.getElementById("date").innerHTML = date;
         document.getElementById("country").value = "";
     }
     console.log(countryarr);
