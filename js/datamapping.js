@@ -117,4 +117,4 @@ function timeseriesFills(ts) {
 	//Inner function to stop the intervalling
 
 }
-
+//document.getElementById("date").innerHTML = new Date().format('m-d-Y');
