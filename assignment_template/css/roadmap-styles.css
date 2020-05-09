@@ -8,10 +8,28 @@
     to {opacity: 1;}
 }
 
-#image {
+.hp {
+    --row3-min-height: 700px;
+    --row3-max-height: 1000px;
+    --row3-height: auto;
+    --row3-color: whitesmoke;
+    --row3-margin: 2rem;
+}
+
+#image { /* Div element with image */
     grid-column: 1;
     grid-row: 3;
-    margin-left: 4rem;
+    margin-left: 5rem;
+    width: auto;
+    height: auto;
+    background-color: var(--row3-color);
+}
+
+#sometimes { /* Image element with ID sometimes */
+    object-fit: cover;
+    width: 100%;
+    min-height: var(--row3-min-height);
+    max-height: var(--row3-max-height);
     animation-name: opacity;
     animation-duration: 3s;
 }
@@ -47,8 +65,10 @@ input[name="type-input"] {
     grid-column: 2 / span 3;
     grid-row: 3;
     width: auto;
-    margin-right: 10rem; 
-    background-color: whitesmoke;
+    height: var(--row3-height);
+    min-height: var(--row3-min-height);
+    margin-right: 7rem;
+    background-color: var(--row3-color);
 }
 
 #todo {
@@ -106,7 +126,7 @@ cite {
 
 /* CHECKBOX STYLES */
 
-/* custom properties (AKA css variables) */
+/* Custom properties (AKA css variables) */
 .si {
     --color-label: black;
     --color-default: #149bdf;
