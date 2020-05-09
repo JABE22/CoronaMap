@@ -120,6 +120,7 @@ function inputHandler(e) {
         } else {
             countryarr.unshift(constructTableRow(codeMap[country]));
         }
+		stop(inte);
         colorNeighbors(codeMap[country]);
         printTable();
         document.getElementById("country").value = "";
