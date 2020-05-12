@@ -1,15 +1,26 @@
+
+/* Site properties */
+.sp {
+    /* Site colors */
+    --nav-bar-color: #666666;
+    --main-site-color: #1E90FF;  /* #0e90d2; */
+    --main-text-color: whitesmoke;
+    --button-text-color: white;
+    /* Common element sizes */
+    --navbar-height: 90px;
+}
+
 body {
     display: grid;
-    grid-template: auto 100px auto auto auto / auto auto 50vw; /* 5 x 3 grid */
-    background-color: lightgrey;
+    grid-template: auto 120px auto auto auto / auto auto 50vw; /* 5 x 3 grid */
+    background-color:  #ddd;
     /* Congruent font family style for whole site */
-    font-family: Tahoma, "Trebuchet MS", Helvetica, sans-serif;
-    
+    font-family: Teko; /* var(--site-font); /* Tahoma, "Trebuchet MS", Helvetica, sans-serif; */
 }
 
 #date {
     /*position: absolute;*/
-	display: inline-block;
+    display: inline-block;
     vertical-align: top; /* here */
 }
 
@@ -23,6 +34,8 @@ body {
 #logo {
     grid-column: 3;
     grid-row: 1;
+    animation-name: opacity;
+    animation-duration: 3s;
 }
 
 #tau {
@@ -30,28 +43,34 @@ body {
     width: 350px;
 }
 
-/* Second row of Grid for forms and navigation buttons */
+/* (2) Second row of Grid for forms and navigation buttons */
 .form-actions {
+    box-sizing: border-box;
+    border-color: var(--main-site-color); /* No idea, why is this needed here */
     grid-column: 1 / span 2;
     grid-row: 2;
     display: flex;
-    flex-direction: row;
-    height: 55px;
-    min-width: 620px;
+    flex-direction: row-reverse;
+    align-content: flex-end;
+    overflow: hidden;
+    height: var(--navbar-height);
     margin: 0px;
     padding: 15px;
-    background-color: #0e90d2;
+    background-color: var(--main-site-color);
 }
 
 nav {
+    box-sizing: border-box;
     grid-column: 3;
     grid-row: 2;
     display: flex;
     flex-direction: row;
-    height: 55px;
+    height: var(--navbar-height);
     margin: 0px;
-    padding: 16px;
-    background-color: #666666;
+    padding: 15px;
+    background-color: var(--nav-bar-color);
+    animation-name: margin-lf;
+    animation-duration: 2s;
 }
 
 #countryform {
@@ -89,13 +108,20 @@ input[name="country"] {
     -o-border-radius:3px 3px 3px;
     -webkit-border-radius:3px 3px 3px;
     -moz-border-radius:3px 3px 3px;
-    color: white;
+    color: var(--button-text-color);
     background-color: #666666;
 }
 
 form button, label { /* All the form elements gets the same font style */
     display: inline-block;
-    font-size: 18px;
+    font-family: var(--site-font);
+    font-size: 20px;
+    color: var(--button-text-color);
+}
+
+form {
+    white-space: nowrap;
+    display: inline-block;
 }
 
 #country-label {
@@ -103,14 +129,13 @@ form button, label { /* All the form elements gets the same font style */
 }
 
 
-
-/* Third row of Grid for Corona-statistics table */
+/* (3) Third row of Grid for Corona-statistics table */
 #tablecont {
     grid-column: 1 / span 3;
     grid-row: 3;
     margin-bottom: 5px;
     margin-left: 20px;
-    margin-right: 20px;
+    margin-right: 50px;
 }
 
 #corona_stats {
@@ -122,7 +147,7 @@ form button, label { /* All the form elements gets the same font style */
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #149bdf;
+    background-color: var(--main-site-color);
     color: white;
 }
 
@@ -135,7 +160,7 @@ form button, label { /* All the form elements gets the same font style */
 #corona_stats tr:hover { background-color: #bce8f1; }
 
 
-/* Fourth row of Grid for Corona Map */
+/* (4 )Fourth row of Grid for Corona Map */
 #containerofmap {
     grid-column: 1 / span 3;
     grid-row: 4;
@@ -143,18 +168,17 @@ form button, label { /* All the form elements gets the same font style */
     align-items: center;
     justify-content: center;
     height: 100vh;
-    width: 100vw;   
+    width: 100vw;
 }
 
 #map-container {
-    /*display: flex;
-    align-items: center;
-    justify-content: center;*/
-	text-align: center;
     height: 100vh;
-    width: 80vw;
+    width: 75vw;
+    text-align: center;
 }
 
+
+/* Other settings for page elements */
 h1 {
     padding: 20px;
     color: black;
@@ -170,16 +194,16 @@ nav a {
     -o-border-radius: 3px 3px 3px;
     -webkit-border-radius: 3px 3px 3px;
     -moz-border-radius: 3px 3px 3px;
-    background-color: #149bdf;
+    background-color: var(--main-site-color);
     cursor: pointer;
 }
 
 .nav_button {
     width: 150px;
     height: 45px;
-    color: whitesmoke;
+    color: var(--button-text-color);
     padding: 10px;
-    font-size: 18px;
+    font-size: 20px;
     margin: 10px;
     opacity: 0.8;
 }
@@ -201,24 +225,41 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 40px;
     margin-bottom: 20px;
     padding: 15px;
-    color: whitesmoke;
-    background-color: #0e90d2;
+    color: var(--main-text-color);
+    background-color: var(--main-site-color);
     opacity: 0.8;
 }
 
 #slogan {
     margin: 5px;
-    font-size: 16px;
+    font-size: 20px;
     text-shadow: 0px 0px 2px black;
-    color: whitesmoke;
+    color: var(--main-text-color);
 }
 
 #developers {
     margin: 5px;
-    font-size: 14px;
+    font-size: 16px;
     text-shadow: 0px 0px 2px #ddd;
     color: #000;
+}
+
+@keyframes margin-lf {
+    from {margin-left: 100vw;}
+    to {margin-left: 0;}
+}
+
+@keyframes opacity {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@font-face {
+  font-family: Teko;
+  src: url('./fonts/Teko/Teko-Regular.woff');
+  font-weight: 700;
+  font-style: normal;
 }
