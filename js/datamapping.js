@@ -20,7 +20,7 @@ function colorNeighbors(countryCode) {
         });
 
         //In a for-loop, paint the neighbouring countries of the selected country.
-        for (var country in neighMap[countryCode]) {
+        for (let country in neighMap[countryCode]) {
             //Try-catch-block, errors are caused by neighbouring countries that have no cases
             try {
                 console.log(neighMap[countryCode][country]);
@@ -46,7 +46,7 @@ function colorNeighbors(countryCode) {
 function initialFills(mappedcases) {
 
     //Loop thru the cases
-    for (var country in mappedcases) {
+    for (let country in mappedcases) {
         //Try-catch-block, errors are caused by countries that have no cases
         try {
             console.log(country);
@@ -72,7 +72,7 @@ function initialFills(mappedcases) {
  */
 function timeseriesHelper(date, max) {
 
-    for (var country in date) {
+    for (let country in date) {
         try {
             map.updateChoropleth({
 
@@ -95,12 +95,12 @@ function timeseriesHelper(date, max) {
 function timeseriesFills(ts) {
     //Helper variables
     //Keys to the timeseries object
-    var keys = Object.keys(ts);
+    let keys = Object.keys(ts);
     //counter
-    var i = 0;
+    let i = 0;
     //how many days
-    var max = keys.length;
-    var maxdate = ts[keys[max - 1]];
+    let max = keys.length;
+    let maxdate = ts[keys[max - 1]];
     //console.log(maxdate);
 
     //Reset map
@@ -126,7 +126,7 @@ function timeseriesFills(ts) {
     //Inner function to stop the intervalling
 }
 
-var today = new Date();
-var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear().toString().slice(2);
+let today = new Date();
+let date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear().toString().slice(2);
 
 document.getElementById("date").innerHTML = date;

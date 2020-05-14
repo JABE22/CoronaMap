@@ -6,21 +6,22 @@
  * @returns {Object} Time map
  */
 function mapTimeseries(timeseries, countryMap) {
-    const timeMap = {}
+    const timeMap = {};
     const confirmed = timeseries[0]["confirmed"];
     const deaths = timeseries[1]["deaths"];
 
-    for (date in confirmed[0]) {
-        if (date == "Province/State" || date == "Country/Region" || date == "Lat" || date == "Long") {
+    for (var date in confirmed[0]) {
+        if (date === "Province/State" || date === "Country/Region" || 
+            date === "Lat" || date === "Long") {
             continue;
         }
-        timeMap[date] = {}
+        timeMap[date] = {};
     }
-    for (date in timeMap) {
-        for (i = 0; i < confirmed.length; i++) {
+    for (var date in timeMap) {
+        for (var i = 0; i < confirmed.length; i++) {
             const code = countryMap[confirmed[i]["Country/Region"].replace(/_/g, " ")];
-            if (timeMap[date][code] == undefined) {
-                timeMap[date][code] = {}
+            if (timeMap[date][code] === undefined) {
+                timeMap[date][code] = {};
                 timeMap[date][code]["confirmed"] = confirmed[i][date];
                 timeMap[date][code]["deaths"] = deaths[i][date];
             } else {

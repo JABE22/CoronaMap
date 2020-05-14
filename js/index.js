@@ -12,7 +12,7 @@ let inte;
  * 
  * @returns {undefined}
  */
-function stop() {
+function stopTimeseries() {
     clearInterval(inte);
 }
 
@@ -79,6 +79,7 @@ const DEFAULT_FILL = "#EEEEEE";
 
 /**
  * Writes given text to console.log
+ * 
  * @param {string} text Text to print out
  */
 const sayHello = (text) => console.log(text);
@@ -107,9 +108,10 @@ const int = (str) => Number.parseInt(str);
  * H: hue ranges between blue and red, i.e., 240..360.
  * S: saturation is constant (100)
  * L: lightness as a percentage between 0..100%, 0 dark .. 100 light
- * @param {confirmed} d The number of confirmed people having coronavirus
- * @param {deaths} d The number of dead people, 20 times more weight than confirmed
- * @return {color} a HSL color constructed based on confirmed and deaths
+ * 
+ * @param {type} confirmed d The number of confirmed people having coronavirus
+ * @param {type} deaths d The number of dead people, 20 times more weight than confirmed
+ * @returns {String} a HSL color constructed based on confirmed and deaths
  */
 const getColor = (confirmed, deaths) => {
     const denominator = confirmed + deaths === 0 ? 1 : confirmed + deaths;
