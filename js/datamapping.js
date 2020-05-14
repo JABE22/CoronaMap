@@ -1,4 +1,6 @@
 
+/* global map, caseMap, neighMap */
+
 /**
  * Function updates d3 map to show the current corona situation
  * of the selected country and the neighbouring countries of that country.
