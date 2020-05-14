@@ -10,8 +10,9 @@
 
 /**
  * Fetches data from an URL by using window.fetch.
- * @param {string} url - URL from which the data is fetched
- * @returns {} data - FILL IN ONCE COMPLETED
+ * 
+ * @param {type} url - URL from which the data is fetched
+ * @returns {unresolved} data - FILL IN ONCE COMPLETED
  */
 function getJSON(url) {
     // TODO: implement this function
@@ -31,11 +32,11 @@ function getJSON(url) {
  */
 function countryCodeMap(countries, initialCodes) {
     const countryMap = {}
-    for (i = 0; i < countries.length; i++) {
+    for (var i = 0; i < countries.length; i++) {
         let name = countries[i].name.split("(")[0].trim();
         countryMap[name] = countries[i].alpha3Code;
     }
-    for (country in initialCodes) {
+    for (var country in initialCodes) {
         countryMap[country] = initialCodes[country];
     }
     //console.log(countryMap.Congo);
@@ -63,9 +64,9 @@ function fillDataList(codeMap) {
  * @returns {propertyNames|Array}
  */
 function getKey(object, value) {
-    propertyNames = Object.getOwnPropertyNames(object);
-    for (i = 0; i < propertyNames.length; i++) {
-        if (object[propertyNames[i]] == value) {
+    var propertyNames = Object.getOwnPropertyNames(object);
+    for (var i = 0; i < propertyNames.length; i++) {
+        if (object[propertyNames[i]] === value) {
             return propertyNames[i];
         }
     }
@@ -78,7 +79,7 @@ function getKey(object, value) {
  * @returns {String}
  */
 function constructTableRow(code) {
-    var tableRow = "";
+    let tableRow = "";
     
     if (caseMap[code] !== undefined) {
         tableRow = "<tr>\n\
@@ -107,7 +108,7 @@ function constructTableRow(code) {
  */
 function mapCasesWithCountrycodes(cases, countries) {
     const caseMap = {}
-    for (country in cases) {
+    for (var country in cases) {
         let name = country.replace(/_/g, " ");
         if (countries[name] !== undefined) {
             const code = countries[name];
@@ -130,8 +131,8 @@ function mapCasesWithCountrycodes(cases, countries) {
  */
 function inputHandler(e) {
     let country = document.getElementById("country").value;
-    var ccode = codeMap[country];
-    var tableRow = constructTableRow(ccode);
+    let ccode = codeMap[country];
+    let tableRow = constructTableRow(ccode);
     
     /*
     console.log(codeMap[country]);
@@ -164,9 +165,9 @@ function inputHandler(e) {
  * @returns {undefined}
  */
 function printTable() {
-    var tbody = document.getElementsByTagName("tbody")[0];
+    let tbody = document.getElementsByTagName("tbody")[0];
 
-    for (i = 0; i < countryarr.length; i++) {
+    for (var i = 0; i < countryarr.length; i++) {
         tbody.innerHTML = tbody.innerHTML + countryarr[i];
     }
 }
@@ -177,10 +178,10 @@ function printTable() {
  * @returns {String} date in format mm/dd/yy
  */
 function parseDate() {
-    var today = new Date();
-    var date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear().toString().slice(2);
+    let today = new Date();
+    let date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear().toString().slice(2);
     
     return date;
 }
 
-var countryarr = [];
+let countryarr = [];

@@ -5,7 +5,7 @@
 
 // Global variables for basic corona map functionality
 let codeMap, caseMap, neighMap, timeMap;
-var inte;
+let inte;
 
 /**
  * Stops time series. By default, time series will be off.
@@ -92,7 +92,7 @@ const sayHello = (text) => console.log(text);
  */
 const mapNeighbours = (rawNeighbours) => {
     let neighbours = {};
-    for (item in rawNeighbours) {
+    for (var item in rawNeighbours) {
         neighbours[rawNeighbours[item]["alpha3Code"]] = rawNeighbours[item]["borders"];
     }
     return neighbours;
@@ -112,7 +112,7 @@ const int = (str) => Number.parseInt(str);
  * @return {color} a HSL color constructed based on confirmed and deaths
  */
 const getColor = (confirmed, deaths) => {
-    const denominator = confirmed + deaths == 0 ? 1 : confirmed + deaths;
+    const denominator = confirmed + deaths === 0 ? 1 : confirmed + deaths;
     const nominator = deaths ? deaths : 0;
     const hue = int(240 + 120 * nominator / denominator);
     const saturation = 100; //constant
@@ -134,5 +134,5 @@ const getColor = (confirmed, deaths) => {
             );
 })();
 
-var map = new Datamap({element: document.getElementById('map-container'), projection: 'mercator', fills: {defaultFill: DEFAULT_FILL}});
+let map = new Datamap({element: document.getElementById('map-container'), projection: 'mercator', fills: {defaultFill: DEFAULT_FILL}});
 //console.log(mapNeighbours);

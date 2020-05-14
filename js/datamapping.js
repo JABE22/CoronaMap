@@ -1,9 +1,11 @@
+
 /**
- * colorNeighbours function updates d3 map to show the current corona situation
+ * Function updates d3 map to show the current corona situation
  * of the selected country and the neighbouring countries of that country.
  * Updates color fill of the coutnries to the d3 map.
  * 
- * @param {Array<Object>} Receives countryycode from user input in table
+ * @param {type} countryCode Receives countrycode from user input in table
+ * @returns {undefined}
  */
 function colorNeighbors(countryCode) {
 
@@ -18,7 +20,7 @@ function colorNeighbors(countryCode) {
         });
 
         //In a for-loop, paint the neighbouring countries of the selected country.
-        for (country in neighMap[countryCode]) {
+        for (var country in neighMap[countryCode]) {
             //Try-catch-block, errors are caused by neighbouring countries that have no cases
             try {
                 console.log(neighMap[countryCode][country]);
@@ -35,15 +37,16 @@ function colorNeighbors(countryCode) {
 }
 
 /**
- * initialFills-function colors the countries with their current corona stats.
+ * Colors the countries with their current corona stats.
  * Updates color fill of the coutnries to the d3 map.
  * 
- * @param {Array<Object>} mapped cases
+ * @param {type} mappedcases
+ * @returns {undefined}
  */
 function initialFills(mappedcases) {
 
     //Loop thru the cases
-    for (country in mappedcases) {
+    for (var country in mappedcases) {
         //Try-catch-block, errors are caused by countries that have no cases
         try {
             console.log(country);
@@ -62,11 +65,14 @@ function initialFills(mappedcases) {
  * Colors the countries with their corona stats.
  * Method is called "per day"
  * Updates color fill of the coutnries to the d3 map.
- * @param {Array<Object>} @param {Array<Object>} receives object of corona stats for given day
+ * 
+ * @param {type} date receives object of corona stats for given day
+ * @param {type} max
+ * @returns {undefined}
  */
 function timeseriesHelper(date, max) {
 
-    for (country in date) {
+    for (var country in date) {
         try {
             map.updateChoropleth({
 
@@ -83,7 +89,8 @@ function timeseriesHelper(date, max) {
  * Method is called once and receives object of dates, which contain corona stats to that date
  * Updates color fill of the coutnries to the d3 map.
  * 
- * @param {Array<Object>} receives object of corona stats
+ * @param {type} ts receives object of corona stats
+ * @returns {undefined}
  */
 function timeseriesFills(ts) {
     //Helper variables

@@ -6,11 +6,11 @@
 /**
  * Insert item into "todo" list
  * 
- * @param {type} text
+ * @param {type} text for list item
  * @returns {undefined}
  */
 function addListItem(text) {
-  var todoList = document.getElementById('todo');
+  let todoList = document.getElementById('todo');
   let listItem = document.createElement('li');
   let label = document.createElement('label');
   let input = document.createElement('input');
@@ -31,7 +31,7 @@ function addListItem(text) {
   label.appendChild(input);
   label.appendChild(span);
   
-};
+}
 
 /**
  * Defines what happens when Add todo button pressed.
@@ -42,7 +42,7 @@ function addListItem(text) {
 function submitHandler(e) {
   // TODO: implement this function
   e.preventDefault();
-  var text_input = document.querySelector('input#type-input').value;
+  let text_input = document.querySelector('input#type-input').value;
 
   if (!(!text_input || /^\s*$/.test(text_input))) {
     addListItem(text_input);
@@ -61,7 +61,7 @@ function listClickHandler(e) {
   // TODO: implement this function
   e.preventDefault;
   let liElem = e.target;
-  if (liElem.tagName == "LI") {
+  if (liElem.tagName === "LI") {
     let parent = liElem.parentNode;
     if (liElem.classList.contains("done")) {
       parent.removeChild(liElem);
