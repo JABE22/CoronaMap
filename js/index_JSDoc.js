@@ -64,7 +64,7 @@ const fillDataList = function (codeMap) {
  * 
  * @param {object} object - Struct object containing country data
  * @param {string} value - Country code for country name selection
- * @returns {propertyNames|Array} property names
+ * @returns {Array<object>} Property names
  */
 const getKey = function (object, value) {
     const propertyNames = Object.getOwnPropertyNames(object);
@@ -343,6 +343,7 @@ const getColor = (confirmed, deaths) => {
 };
 
 // Self-invoked function to avoid polluting global scope
+/*
 (() => {
     const helloIndex = "Hello from index.js!";
     sayHello(helloIndex);
@@ -350,8 +351,9 @@ const getColor = (confirmed, deaths) => {
             `This is how you can use the configuration object: ${config.baseURL}`
             );
 })();
+*/
 
-const map = new Datamap({element: document.getElementById("map-container"), projection: "mercator", fills: {defaultFill: DEFAULT_FILL}});
+const map = new window.Datamap({element: document.getElementById("map-container"), projection: "mercator", fills: {defaultFill: DEFAULT_FILL}});
 //console.log(mapNeighbours);
 
 
@@ -445,7 +447,7 @@ const timeseriesHelper = function (date) {
  * Method is called once and receives object of dates, which contain corona stats to that date
  * Updates color fill of the coutnries to the d3 map.
  * 
- * @param {type} ts receives object of corona stats
+ * @param {object} ts receives object of corona stats
  * @returns {undefined}
  */
 const timeseriesFills = function (ts) {
