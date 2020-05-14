@@ -296,7 +296,7 @@ const DEFAULT_FILL = "#EEEEEE";
  * @param {string} text Some text to print
  * @returns {undefined} nothing
  */
-const sayHello = (text) => console.log(text);
+// const sayHello = (text) => console.log(text);
 
 /**
  * mapNeighbours arrow function returns neighbours of a country
