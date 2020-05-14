@@ -108,20 +108,25 @@ function mapCasesWithCountrycodes(cases, countries) {
 }
 function inputHandler(e) {
     let country = document.getElementById("country").value;
+    var ccode = codeMap[country];
+    var tableRow = constructTableRow(ccode);
+    
+    /*
     console.log(codeMap[country]);
     console.log(caseMap[codeMap[country]]);
+    */
 
-    if (codeMap[country] !== undefined) {
+    if (ccode !== undefined) {
         document.getElementsByTagName("tbody")[0].innerHTML = "";
-        if (countryarr.includes(constructTableRow(codeMap[country]))) {
-            countryarr.splice(countryarr.indexOf(constructTableRow(codeMap[country])), 1);
+        if (countryarr.includes(tableRow)) {
+            countryarr.splice(countryarr.indexOf(tableRow), 1);
             countryarr.sort();
-            countryarr.unshift(constructTableRow(codeMap[country]));
+            countryarr.unshift(tableRow);
         } else {
-            countryarr.unshift(constructTableRow(codeMap[country]));
+            countryarr.unshift(tableRow);
         }
-		stop(inte);
-        colorNeighbors(codeMap[country]);
+        stop(inte);
+        colorNeighbors(ccode);
         printTable();
         document.getElementById("country").value = "";
     }
@@ -133,8 +138,10 @@ function inputHandler(e) {
 }
 
 function printTable() {
+    var tbody = document.getElementsByTagName("tbody")[0];
+
     for (i = 0; i < countryarr.length; i++) {
-        document.getElementsByTagName("tbody")[0].innerHTML = document.getElementsByTagName("tbody")[0].innerHTML + countryarr[i];
+        tbody.innerHTML = tbody.innerHTML + countryarr[i];
     }
 }
 

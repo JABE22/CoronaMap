@@ -1,7 +1,9 @@
 /**
+ * 
+ * 
  * @param {Array<Object>} timeseries - All corona cases returned from the API
  * @param {Array<Object>} countryMap - codeMap
- * @returns {Object} - 
+ * @returns {Object} - Time Map
  */
   function mapTimeseries(timeseries, countryMap){
       const timeMap = {}

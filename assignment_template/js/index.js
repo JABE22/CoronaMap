@@ -1,4 +1,18 @@
+// Self-invoked function to avoid polluting global scope
+(() => {
+  const helloIndex = "Hello from index.js!";
+  sayHello(helloIndex);
+  console.log(
+    `This is how you can use the configuration object: ${config.baseURL}`
+  );
+})();
+
 // Countries that have some anomalities in their names (such as special chars, brackets, or multiple variants) are collected here
+/**
+ * Countrycodes
+ * 
+ * @type type
+ */
 const INITIAL_CODES = {
   Brunei: "BRN",
   "Mainland China": "CHN",
@@ -28,6 +42,7 @@ const INITIAL_CODES = {
   Laos: "LAO",
   Eswatini: "SWZ",
 };
+
 const DEFAULT_FILL = "#EEEEEE";
 
 /**
@@ -78,14 +93,5 @@ const getColor = (confirmed, deaths) => {
   return `hsl(${hue}, ${saturation}, ${lightness})`;
 };
 
-
-// Self-invoked function to avoid polluting global scope
-(() => {
-  const helloIndex = "Hello from index.js!";
-  sayHello(helloIndex);
-  console.log(
-    `This is how you can use the configuration object: ${config.baseURL}`
-  );
-})();
 var map = new Datamap({element: document.getElementById('map-container'), projection: 'mercator', fills: {defaultFill: DEFAULT_FILL}});
 //console.log(mapNeighbours);
