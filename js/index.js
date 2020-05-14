@@ -83,7 +83,7 @@ const getKey = function (object, value) {
  */
 const constructTableRow = function (code) {
     let tableRow = "";
-    
+
     if (caseMap[code] !== undefined) {
         tableRow = "<tr>\n\
                         <td>" + caseMap[code].country + "</td>\n\
@@ -134,11 +134,11 @@ const mapCasesWithCountrycodes = function (cases, countries) {
 const inputHandler = function () {
     const country = document.getElementById("country").value;
     const ccode = codeMap[country];
-    const tableRow = constructTableRow(ccode);    
+    const tableRow = constructTableRow(ccode);
     /*
-    console.log(codeMap[country]);
-    console.log(caseMap[codeMap[country]]);
-    */
+     console.log(codeMap[country]);
+     console.log(caseMap[codeMap[country]]);
+     */
     if (ccode !== undefined) {
         document.getElementsByTagName("tbody")[0].innerHTML = "";
         if (countryarr.includes(tableRow)) {
@@ -178,8 +178,8 @@ const printTable = function () {
  */
 const parseDate = function () {
     const today = new Date();
-    const date = (today.getMonth()+1)+"/"+today.getDate()+"/"+today.getFullYear().toString().slice(2);
-    
+    const date = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear().toString().slice(2);
+
     return date;
 };
 
@@ -193,7 +193,7 @@ const numbers2 = [175, 50, 25, 45, 10];
  * @returns {Array<number>} table with square roots
  */
 const myMapFunction = function (table) {
-  return table.map(Math.sqrt);
+    return table.map(Math.sqrt);
 };
 
 /**
@@ -205,7 +205,7 @@ const myMapFunction = function (table) {
  * @returns {number} last divided number
  */
 const myDivideFunction = function (total, num) {
-	return total / num;
+    return total / num;
 };
 
 // Just some play with Array functions :)
@@ -252,8 +252,8 @@ const initialize = async function () {
     document.getElementById("country").addEventListener("input", inputHandler);
     document.getElementById("countryform").addEventListener("submit", (e) => e.preventDefault());
     document.getElementById("timeseries").onclick = function () {
-                                                          timeseriesFills(timeMap);
-                                                     };
+        timeseriesFills(timeMap);
+    };
 };
 
 /* Countries that have some anomalities in their names (such as special chars, 
@@ -344,14 +344,14 @@ const getColor = (confirmed, deaths) => {
 
 // Self-invoked function to avoid polluting global scope
 /*
-(() => {
-    const helloIndex = "Hello from index.js!";
-    sayHello(helloIndex);
-    console.log(
-            `This is how you can use the configuration object: ${config.baseURL}`
-            );
-})();
-*/
+ (() => {
+ const helloIndex = "Hello from index.js!";
+ sayHello(helloIndex);
+ console.log(
+ `This is how you can use the configuration object: ${config.baseURL}`
+ );
+ })();
+ */
 
 const map = new window.Datamap({element: document.getElementById("map-container"), projection: "mercator", fills: {defaultFill: DEFAULT_FILL}});
 //console.log(mapNeighbours);
@@ -387,9 +387,9 @@ const colorNeighbors = function (countryCode) {
             try {
                 console.log(neighMap[countryCode][country]);
                 map.updateChoropleth({
-                    [neighMap[countryCode][country]]: 
-                     getColor(caseMap[neighMap[countryCode][country]].confirmed, 
-                     caseMap[neighMap[countryCode][country]].deaths)
+                    [neighMap[countryCode][country]]:
+                            getColor(caseMap[neighMap[countryCode][country]].confirmed,
+                                    caseMap[neighMap[countryCode][country]].deaths)
                 });
             } catch (error) {
                 console.log("was nothing in that country");
@@ -467,7 +467,7 @@ const timeseriesFills = function (ts) {
     //intervalling.
     timeseriesHelper(ts[keys[i]], maxdate);
     document.getElementById("date").innerHTML = keys[i].toString();
-    window.inte = 
+    window.inte =
             setInterval(function () {
                 i++;
                 console.log(keys[i]);
@@ -477,7 +477,7 @@ const timeseriesFills = function (ts) {
                 }
                 timeseriesHelper(ts[keys[i]], maxdate);
                 document.getElementById("date").innerHTML = keys[i].toString();
-    }, 1000); // Called about three times per second with iterated key
+            }, 1000); // Called about three times per second with iterated key
 };
 
 const today = new Date();
@@ -502,8 +502,8 @@ const mapTimeseries = function (timeseries, countryMap) {
     let date;
 
     for (date in confirmed[0]) {
-        if (date === "Province/State" || date === "Country/Region" || 
-            date === "Lat" || date === "Long") {
+        if (date === "Province/State" || date === "Country/Region" ||
+                date === "Lat" || date === "Long") {
             continue;
         }
         timeMap[date] = {};
@@ -525,3 +525,9 @@ const mapTimeseries = function (timeseries, countryMap) {
     return timeMap;
 };
 
+const stop = function () {
+    clearInterval(window.inte);
+};
+
+stop();
+initialize();
