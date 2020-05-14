@@ -1,3 +1,9 @@
+/**
+ * Writes given text to console.log
+ * @param {string} text Text to print out
+ */
+const sayHello = (text) => console.log(text);
+
 // Self-invoked function to avoid polluting global scope
 (() => {
   const helloIndex = "Hello from index.js!";
@@ -44,12 +50,6 @@ const INITIAL_CODES = {
 };
 
 const DEFAULT_FILL = "#EEEEEE";
-
-/**
- * Writes given text to console.log
- * @param {string} text Text to print out
- */
-const sayHello = (text) => console.log(text);
 
 /**
  * mapNeighbours arrow function returns neighbours of a country
