@@ -55,10 +55,20 @@ const DEFAULT_FILL = "#EEEEEE";
 let codeMap, caseMap, neighMap, timeMap;
 var inte;
 
+/**
+ * Stops timeseries. By default, timeseries will be off.
+ * 
+ * @returns {undefined}
+ */
 function stop() {
     clearInterval(inte);
 }
 
+/**
+ * The core of Corona Web App. Initializations for Corona Map functionality.
+ * 
+ * @returns {undefined}
+ */
 async function initialize() {
     const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
     codeMap = countryCodeMap(countries, INITIAL_CODES);
@@ -79,10 +89,6 @@ async function initialize() {
         timeseriesFills(timeMap);
     };
 }
-
-(async () => {
-    
-})();
 
 /**
  * mapNeighbours arrow function returns neighbours of a country
