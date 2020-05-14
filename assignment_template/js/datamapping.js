@@ -1,7 +1,8 @@
 /**
- * colorNeighbours function updates d3 map to show the current corona situation
+ * Function updates d3 map to show the current corona situation
  * of the selected country and the neighbouring countries of that country.
  * Updates color fill of the coutnries to the d3 map.
+ * 
  * @param {Array<Object>} Receives countryycode from user input in table
  */
 function colorNeighbors(countryCode) {
@@ -32,7 +33,6 @@ function colorNeighbors(countryCode) {
         console.log(err);
     }
 }
-;
 
 /**
  * initialFills-function colors the countries with their current corona stats.
@@ -56,13 +56,14 @@ function initialFills(mappedcases) {
     }
 
 }
-;
 
 /**
- * timeseriesHelper colors the countries with their corona stats.
- * Method is called "per day"
- * Updates color fill of the coutnries to the d3 map.
- * @param {Array<Object>} @param {Array<Object>} receives object of corona stats for given day
+ * Colors the countries with their corona stats. Method is called "per day"
+ * Updates color fill of the countries to the d3 map.
+ * 
+ * @param {type} date receives object of corona stats for given day
+ * @param {type} max 
+ * @returns {undefined}
  */
 function timeseriesHelper(date, max) {
 

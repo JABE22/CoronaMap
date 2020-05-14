@@ -1,5 +1,6 @@
 /**
  * Writes given text to console.log
+ * 
  * @param {string} text Text to print out
  */
 const sayHello = (text) => console.log(text);
@@ -55,6 +56,7 @@ const DEFAULT_FILL = "#EEEEEE";
  * mapNeighbours arrow function returns neighbours of a country
  * as an associative array (i.e., object) where a key is a country codes and
  * the value is an array containing the neighbour country codes.
+ * 
  * @param {json} rawNeighbours the parsed JSON content fetched from the API endpoint https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours
  * @returns an object where keys are three-char country codes (alpha3codes), and the values are neighbour country codes as an array.
  */
@@ -75,6 +77,7 @@ const int = (str) => Number.parseInt(str);
  * H: hue ranges between blue and red, i.e., 240..360.
  * S: saturation is constant (100)
  * L: lightness as a percentage between 0..100%, 0 dark .. 100 light
+ * 
  * @param {confirmed} d The number of confirmed people having coronavirus
  * @param {deaths} d The number of dead people, 20 times more weight than confirmed
  * @return {color} a HSL color constructed based on confirmed and deaths
@@ -93,5 +96,7 @@ const getColor = (confirmed, deaths) => {
   return `hsl(${hue}, ${saturation}, ${lightness})`;
 };
 
-var map = new Datamap({element: document.getElementById('map-container'), projection: 'mercator', fills: {defaultFill: DEFAULT_FILL}});
+var map = new Datamap({element: document.getElementById('map-container'), 
+                       projection: 'mercator', 
+                       fills: {defaultFill: DEFAULT_FILL}});
 //console.log(mapNeighbours);

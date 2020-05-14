@@ -70,5 +70,6 @@ function listClickHandler(e) {
     }
 }
 
+// Event listeners
 document.getElementById('form').addEventListener('submit', submitHandler);
 document.getElementById('todo').addEventListener('click', listClickHandler);

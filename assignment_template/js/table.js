@@ -1,21 +1,3 @@
-/*const INITIAL_CODES = {
- Brunei: 'BRN',
- 'Mainland China': 'CHN',
- US: 'USA',
- Iran: 'IRN',
- 'South Korea': 'KOR',
- 'Korea, South': 'KOR',
- 'Taiwan*': 'TWN',
- UK: 'GBR',
- 'United Kingdom': 'GBR',
- Czechia: 'CZE',
- Russia: 'RUS',
- 'United Arab Emirates': 'UAE',
- Macau: 'MAC',
- 'North Macedonia': 'MKD',
- Venezuela: 'VEN',
- Vietnam: 'VNM'
- };*/
 /**
  * ADD YOUR FUNCTIONS BELOW THIS COMMENT BLOCK
  * Include these functions from previous exercises
@@ -25,6 +7,7 @@
  *   - constructTableRow(code)
  *   - getKey(object, value) (this is needed by constructTableRow(code) function)
  */
+
 /**
  * Fetches data from an URL by using window.fetch.
  * @param {string} url - URL from which the data is fetched
@@ -69,7 +52,14 @@ function fillDataList(codeMap) {
     }
     document.getElementById("searchresults").innerHTML = allCodes;
 }
-//Tän vois muokata fiksummaks
+
+/**
+ * 
+ * 
+ * @param {type} object
+ * @param {type} value
+ * @returns {propertyNames|Array}
+ */
 function getKey(object, value) {
     propertyNames = Object.getOwnPropertyNames(object);
     for (i = 0; i < propertyNames.length; i++) {
@@ -78,14 +68,37 @@ function getKey(object, value) {
         }
     }
 }
-function constructTableRow(code) {
-    if (caseMap[code] != undefined) {
-        return "<tr><td>" + caseMap[code].country + "</td><td>" + caseMap[code].confirmed + "</td><td>" + caseMap[code].deaths + "</td><td>" + caseMap[code].recovered + "</td></tr>";
-    } else {
-        return "<tr><td>" + getKey(codeMap, code) + "</td><td>-</td><td>-</td><td>-</td></tr>";
-    }
-}
+
 /**
+ * 
+ * 
+ * @param {type} code
+ * @returns {String}
+ */
+function constructTableRow(code) {
+    var tableRow = "";
+    
+    if (caseMap[code] != undefined) {
+        tableRow = "<tr>\n\
+                        <td>" + caseMap[code].country + "</td>\n\
+                        <td>" + caseMap[code].confirmed + "</td>\n\
+                        <td>" + caseMap[code].deaths + "</td>\n\
+                        <td>" + caseMap[code].recovered + "</td>\n\
+                    </tr>";
+    } else {
+        tableRow = "<tr>\n\
+                        <td>" + getKey(codeMap, code) + "</td>\n\
+                        <td>-</td>\n\
+                        <td>-</td>\n\
+                        <td>-</td>\n\
+                    </tr>";
+    }
+    return tableRow;
+}
+
+/**
+ * 
+ * 
  * @param {Array<Object>} cases - All corona cases returned from the API
  * @param {Array<Object>} countries - codeMap
  * @returns {Object} - Map of country codes to corona cases in the country
@@ -106,6 +119,12 @@ function mapCasesWithCountrycodes(cases, countries) {
     //console.log(caseMap);
     return caseMap;
 }
+
+/**
+ * 
+ * @param {type} e
+ * @returns {undefined}
+ */
 function inputHandler(e) {
     let country = document.getElementById("country").value;
     var ccode = codeMap[country];
@@ -137,6 +156,10 @@ function inputHandler(e) {
 
 }
 
+/**
+ * 
+ * @returns {undefined}
+ */
 function printTable() {
     var tbody = document.getElementsByTagName("tbody")[0];
 
