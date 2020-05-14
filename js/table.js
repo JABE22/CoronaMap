@@ -66,7 +66,7 @@ const fillDataList = function (codeMap) {
  * @param {string} value - Country code for country name selection
  * @returns {propertyNames|Array} property names
  */
-let getKey = function (object, value) {
+const getKey = function (object, value) {
     const propertyNames = Object.getOwnPropertyNames(object);
     for (let i = 0; i < propertyNames.length; i++) {
         if (object[propertyNames[i]] === value) {
@@ -81,7 +81,7 @@ let getKey = function (object, value) {
  * @param {string} code - Country code 
  * @returns {string} - Table row in html format
  */
-let constructTableRow = function (code) {
+const constructTableRow = function (code) {
     let tableRow = "";
     
     if (caseMap[code] !== undefined) {
@@ -212,4 +212,4 @@ const myDivideFunction = function (total, num) {
 console.log(myMapFunction(numbers1)); // Should print [2,3,4,5]
 console.log(numbers2.reduce(myDivideFunction)); // Should print 0.0003111111111111111
 
-let countryarr = [];
+const countryarr = [];

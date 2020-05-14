@@ -1,10 +1,12 @@
+/* global inputHandler, config, getJSON */
+
 /**
  * JavaScript for Corona Map in index.html
  * 
  */
 
 // Global variables for basic corona map functionality
-let codeMap, caseMap, neighMap, timeMap, inte;
+let codeMap, caseMap, neighMap, timeMap;
 
 /**
  * The core of Corona Web App functionality. Initializations for Corona Map 

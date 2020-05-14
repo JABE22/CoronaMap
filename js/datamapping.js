@@ -1,6 +1,8 @@
 
 /* global map, caseMap, neighMap */
 
+let inte;
+
 /**
  * Function updates d3 map to show the current corona situation
  * of the selected country and the neighbouring countries of that country.
@@ -104,7 +106,7 @@ const timeseriesFills = function (ts) {
     //intervalling.
     timeseriesHelper(ts[keys[i]], maxdate);
     document.getElementById("date").innerHTML = keys[i].toString();
-    inte = 
+    window.inte = 
             setInterval(function () {
                 i++;
                 console.log(keys[i]);
