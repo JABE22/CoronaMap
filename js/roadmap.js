@@ -9,7 +9,7 @@
  * @param {type} text for list item
  * @returns {undefined}
  */
-function addListItem(text) {
+let addListItem = function (text) {
   let todoList = document.getElementById('todo');
   let listItem = document.createElement('li');
   let label = document.createElement('label');
@@ -31,7 +31,7 @@ function addListItem(text) {
   label.appendChild(input);
   label.appendChild(span);
   
-}
+};
 
 /**
  * Defines what happens when Add todo button pressed.
@@ -39,7 +39,7 @@ function addListItem(text) {
  * @param {type} e
  * @returns {undefined}
  */
-function submitHandler(e) {
+let submitHandler = function (e) {
   // TODO: implement this function
   e.preventDefault();
   let text_input = document.querySelector('input#type-input').value;
@@ -48,7 +48,7 @@ function submitHandler(e) {
     addListItem(text_input);
   }
   document.querySelector('input#type-input').value = "";
-}
+};
 
 /**
  * Handler for list items. Functionality based on state of list item. Removes list
@@ -57,7 +57,7 @@ function submitHandler(e) {
  * @param {type} e
  * @returns {undefined}
  */
-function listClickHandler(e) {
+let listClickHandler = function (e) {
   // TODO: implement this function
   e.preventDefault;
   let liElem = e.target;
@@ -69,7 +69,7 @@ function listClickHandler(e) {
       liElem.classList.add("done");
     }
   }
-}
+};
 
 document.getElementById('form').addEventListener('submit', submitHandler);
 document.getElementById('todo').addEventListener('click', listClickHandler);

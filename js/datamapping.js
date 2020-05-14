@@ -7,18 +7,15 @@
  * @param {type} countryCode Receives countrycode from user input in table
  * @returns {undefined}
  */
-function colorNeighbors(countryCode) {
-
+let colorNeighbors = function (countryCode) {
     //Reset all colours to default fill
     map.updateChoropleth(null, {reset: true});
-
     //try-catch-block. Errors are caused by faulty or empty countrycodes
     try {
         //First paint the selected country
         map.updateChoropleth({
             [countryCode]: getColor(caseMap[countryCode].confirmed, caseMap[countryCode].deaths)
         });
-
         //In a for-loop, paint the neighbouring countries of the selected country.
         for (let country in neighMap[countryCode]) {
             //Try-catch-block, errors are caused by neighbouring countries that have no cases
@@ -34,7 +31,7 @@ function colorNeighbors(countryCode) {
     } catch (err) {
         console.log(err);
     }
-}
+};
 
 /**
  * Colors the countries with their current corona stats.
@@ -43,23 +40,20 @@ function colorNeighbors(countryCode) {
  * @param {type} mappedcases
  * @returns {undefined}
  */
-function initialFills(mappedcases) {
-
+let initialFills = function (mappedcases) {
     //Loop thru the cases
     for (let country in mappedcases) {
         //Try-catch-block, errors are caused by countries that have no cases
         try {
             console.log(country);
             map.updateChoropleth({
-
                 [country]: getColor(mappedcases[country].confirmed, mappedcases[country].deaths)
             });
         } catch (error) {
             console.log("was nothing in that country");
         }
     }
-
-}
+};
 
 /**
  * Colors the countries with their corona stats.
@@ -70,19 +64,17 @@ function initialFills(mappedcases) {
  * @param {type} max
  * @returns {undefined}
  */
-function timeseriesHelper(date, max) {
-
+let timeseriesHelper = function (date, max) {
     for (let country in date) {
         try {
             map.updateChoropleth({
-
                 [country]: getColor(date[country].confirmed, date[country].deaths)
             });
         } catch (error) {
             console.log("was nothing in that country");
         }
     }
-}
+};
 
 /**
  * Colors the countries with their corona stats.
@@ -92,7 +84,7 @@ function timeseriesHelper(date, max) {
  * @param {type} ts receives object of corona stats
  * @returns {undefined}
  */
-function timeseriesFills(ts) {
+let timeseriesFills = function (ts) {
     //Helper variables
     //Keys to the timeseries object
     let keys = Object.keys(ts);
@@ -109,22 +101,18 @@ function timeseriesFills(ts) {
     //intervalling.
     timeseriesHelper(ts[keys[i]], maxdate);
     document.getElementById("date").innerHTML = keys[i].toString();
-    inte = setInterval(function () {
-        i++;
-        console.log(keys[i]);
-
-        //Called once per second with iterated key
-
-        //If all dates have been looped thru, stop
-        if (typeof keys[i] === 'undefined') {
-            stop();
-        }
-        timeseriesHelper(ts[keys[i]], maxdate);
-        document.getElementById("date").innerHTML = keys[i].toString();
-
-    }, 300);
-    //Inner function to stop the intervalling
-}
+    window.inte = 
+            setInterval(function () {
+                i++;
+                console.log(keys[i]);
+                //If all dates have been looped thru, stop
+                if (typeof keys[i] === 'undefined') {
+                    stop();
+                }
+                timeseriesHelper(ts[keys[i]], maxdate);
+                document.getElementById("date").innerHTML = keys[i].toString();
+    }, 300); // Called about three times per second with iterated key
+};
 
 let today = new Date();
 let date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear().toString().slice(2);

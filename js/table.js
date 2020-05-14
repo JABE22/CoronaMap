@@ -15,14 +15,14 @@
  * @param {type} url - URL from which the data is fetched
  * @returns {unresolved} data - FILL IN ONCE COMPLETED
  */
-function getJSON(url) {
+let getJSON = function (url) {
     // TODO: implement this function
     return fetch(url)
             .then(function (response) {
                 //response jasoniksi
                 return response.json();
             });
-}
+};
 
 /**
  * Modifies the country data so that it is compatible between different end-points.
@@ -31,7 +31,7 @@ function getJSON(url) {
  * @param {Array<Object>} initialCodes - Countries that need to be changed
  * @returns {Object} - Map of country names to country codes
  */
-function countryCodeMap(countries, initialCodes) {
+let countryCodeMap = function (countries, initialCodes) {
     const countryMap = {};
     for (let i = 0; i < countries.length; i++) {
         let name = countries[i].name.split("(")[0].trim();
@@ -42,44 +42,44 @@ function countryCodeMap(countries, initialCodes) {
     }
     //console.log(countryMap.Congo);
     return countryMap;
-}
+};
 
 /**
  * Fills datalist with country names
  *
  * @param {Array<Object>} codeMap - Country codes and names
  */
-function fillDataList(codeMap) {
+let fillDataList = function (codeMap) {
     let allCodes = "";
     for (const country in codeMap) {
         allCodes += "<option value ='" + country + "'>";
     }
     document.getElementById("searchresults").innerHTML = allCodes;
-}
+};
 
 /**
  * Gets country name based on country key value.
  * 
  * @param {type} object
  * @param {type} value
- * @returns {propertyNames|Array}
+ * @returns {propertyNames|Array} property names
  */
-function getKey(object, value) {
+let getKey = function (object, value) {
     let propertyNames = Object.getOwnPropertyNames(object);
     for (let i = 0; i < propertyNames.length; i++) {
         if (object[propertyNames[i]] === value) {
             return propertyNames[i];
         }
     }
-}
+};
 
 /**
  * Contruct table row as html format.
  * 
  * @param {type} code
- * @returns {String}
+ * @returns {String} table row
  */
-function constructTableRow(code) {
+let constructTableRow = function (code) {
     let tableRow = "";
     
     if (caseMap[code] !== undefined) {
@@ -98,7 +98,7 @@ function constructTableRow(code) {
                     </tr>";
     }
     return tableRow;
-}
+};
 
 /**
  * Map cases with country codes.
@@ -107,7 +107,7 @@ function constructTableRow(code) {
  * @param {Array<Object>} countries - codeMap
  * @returns {Object} - Map of country codes to corona cases in the country
  */
-function mapCasesWithCountrycodes(cases, countries) {
+let mapCasesWithCountrycodes = function (cases, countries) {
     const caseMap = {};
     for (let country in cases) {
         let name = country.replace(/_/g, " ");
@@ -122,24 +122,23 @@ function mapCasesWithCountrycodes(cases, countries) {
     }
     //console.log(caseMap);
     return caseMap;
-}
+};
 
 /**
  * Input handler for country search box (datalist)
  * 
  * @param {type} e
- * @returns {undefined}
+ * @returns {undefined} nothing
  */
-function inputHandler(e) {
+
+let inputHandler = function (e) {
     let country = document.getElementById("country").value;
     let ccode = codeMap[country];
-    let tableRow = constructTableRow(ccode);
-    
+    let tableRow = constructTableRow(ccode);    
     /*
     console.log(codeMap[country]);
     console.log(caseMap[codeMap[country]]);
     */
-
     if (ccode !== undefined) {
         document.getElementsByTagName("tbody")[0].innerHTML = "";
         if (countryarr.includes(tableRow)) {
@@ -157,56 +156,57 @@ function inputHandler(e) {
         document.getElementById("country").value = "";
     }
     console.log(countryarr);
-
-}
+};
 
 /**
  * Construct country table
  * 
- * @returns {undefined}
+ * @returns {undefined} table
  */
-function printTable() {
+let printTable = function () {
     let tbody = document.getElementsByTagName("tbody")[0];
 
     for (let i = 0; i < countryarr.length; i++) {
         tbody.innerHTML = tbody.innerHTML + countryarr[i];
     }
-}
+};
 
 /**
  * Parses date and returns it in specific format
  * 
  * @returns {String} date in format mm/dd/yy
  */
-function parseDate() {
+let parseDate = function () {
     let today = new Date();
     let date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear().toString().slice(2);
     
     return date;
-}
+};
 
-var numbers1 = [4, 9, 16, 25];
-var numbers2 = [175, 50, 25, 45, 10];
+let numbers1 = [4, 9, 16, 25];
+let numbers2 = [175, 50, 25, 45, 10];
 
 /**
  * Takes square root for every number in the table given as parameter.
  * 
  * @param {type} table
- * @returns {unresolved}
+ * @returns {unresolved} table with square roots
  */
-function myMapFunction(table) {
+let myMapFunction = function (table) {
   return table.map(Math.sqrt);
-}
+};
 
 /**
+ * Divides first number of the list for every other number on the list
+ * starting left and forwarding into right.
  * 
  * @param {type} total
  * @param {type} num
- * @returns {Number}
+ * @returns {Number} last divided number
  */
-function myDivideFunction(total, num) {
+let myDivideFunction = function (total, num) {
 	return total / num;
-}
+};
 
 // Just some play with Array functions :)
 console.log(myMapFunction(numbers1)); // Should print [2,3,4,5]
