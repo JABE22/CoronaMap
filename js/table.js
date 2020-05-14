@@ -184,4 +184,31 @@ function parseDate() {
     return date;
 }
 
+var numbers1 = [4, 9, 16, 25];
+var numbers2 = [175, 50, 25, 45, 10];
+
+/**
+ * Takes square root for every number in the table given as parameter.
+ * 
+ * @param {type} table
+ * @returns {unresolved}
+ */
+function myMapFunction(table) {
+  return table.map(Math.sqrt);
+}
+
+/**
+ * 
+ * @param {type} total
+ * @param {type} num
+ * @returns {Number}
+ */
+function myDivideFunction(total, num) {
+	return total / num;
+}
+
+// Just some play with Array functions :)
+console.log(myMapFunction(numbers1)); // Should print [2,3,4,5]
+console.log(numbers2.reduce(myDivideFunction)); // Should print 0.0003111111111111111
+
 let countryarr = [];
