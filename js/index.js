@@ -13,21 +13,21 @@ let codeMap, caseMap, neighMap, timeMap, inte;
  * @returns {undefined}
  */
 (async () => {
-    const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
+    const countries = await getJSON("https://tie-lukioplus.rd.tuni.fi/corona/api/countries");
     codeMap = countryCodeMap(countries, INITIAL_CODES);
     fillDataList(codeMap);
     console.log("codemap");
     console.log(codeMap);
-    const neighboursMapped = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours');
+    const neighboursMapped = await getJSON("https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours");
     neighMap = mapNeighbours(neighboursMapped);
     console.log(neighboursMapped);
-    const cases = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona');
+    const cases = await getJSON("https://tie-lukioplus.rd.tuni.fi/corona/api/corona");
     caseMap = mapCasesWithCountrycodes(cases, codeMap);
     initialFills(caseMap);
-    const timeseries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona/timeseries/');
+    const timeseries = await getJSON("https://tie-lukioplus.rd.tuni.fi/corona/api/corona/timeseries/");
     timeMap = mapTimeseries(timeseries, codeMap);
-    document.getElementById('country').addEventListener('input', inputHandler);
-    document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
+    document.getElementById("country").addEventListener("input", inputHandler);
+    document.getElementById("countryform").addEventListener("submit", (e) => e.preventDefault());
     document.getElementById("timeseries").onclick = function () {
                                                           timeseriesFills(timeMap);
                                                      };
@@ -70,7 +70,8 @@ const DEFAULT_FILL = "#EEEEEE";
 /**
  * Writes given text to console.log
  * 
- * @param {string} text Text to print out
+ * @param {string} text Some text to print
+ * @returns {undefined} nothing
  */
 const sayHello = (text) => console.log(text);
 
@@ -78,12 +79,13 @@ const sayHello = (text) => console.log(text);
  * mapNeighbours arrow function returns neighbours of a country
  * as an associative array (i.e., object) where a key is a country codes and
  * the value is an array containing the neighbour country codes.
- * @param {json} rawNeighbours the parsed JSON content fetched from the API endpoint https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours
- * @returns an object where keys are three-char country codes (alpha3codes), and the values are neighbour country codes as an array.
+ * 
+ * @param {object} rawNeighbours the parsed JSON content fetched from the API endpoint https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours
+ * @returns {Array<object>} an object where keys are three-char country codes (alpha3codes), and the values are neighbour country codes as an array.
  */
 const mapNeighbours = (rawNeighbours) => {
-    let neighbours = {};
-    for (let item in rawNeighbours) {
+    const neighbours = {};
+    for (const item in rawNeighbours) {
         neighbours[rawNeighbours[item]["alpha3Code"]] = rawNeighbours[item]["borders"];
     }
     return neighbours;
@@ -99,9 +101,9 @@ const int = (str) => Number.parseInt(str);
  * S: saturation is constant (100)
  * L: lightness as a percentage between 0..100%, 0 dark .. 100 light
  * 
- * @param {type} confirmed d The number of confirmed people having coronavirus
- * @param {type} deaths d The number of dead people, 20 times more weight than confirmed
- * @returns {String} a HSL color constructed based on confirmed and deaths
+ * @param {number} confirmed d The number of confirmed people having coronavirus
+ * @param {number} deaths d The number of dead people, 20 times more weight than confirmed
+ * @returns {string} a HSL color constructed based on confirmed and deaths
  */
 const getColor = (confirmed, deaths) => {
     const denominator = confirmed + deaths === 0 ? 1 : confirmed + deaths;
@@ -126,5 +128,5 @@ const getColor = (confirmed, deaths) => {
             );
 })();
 
-let map = new Datamap({element: document.getElementById('map-container'), projection: 'mercator', fills: {defaultFill: DEFAULT_FILL}});
+const map = new Datamap({element: document.getElementById("map-container"), projection: "mercator", fills: {defaultFill: DEFAULT_FILL}});
 //console.log(mapNeighbours);

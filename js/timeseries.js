@@ -1,11 +1,11 @@
 /**
  * Map time series.
  * 
- * @param {Array<Object>} timeseries - All corona cases returned from the API
- * @param {Array<Object>} countryMap - codeMap
- * @returns {Object} Time map
+ * @param {Array<object>} timeseries - All corona cases returned from the API
+ * @param {Array<object>} countryMap - codeMap
+ * @returns {object} Time map
  */
-let mapTimeseries = function (timeseries, countryMap) {
+const mapTimeseries = function (timeseries, countryMap) {
     const timeMap = {};
     const confirmed = timeseries[0]["confirmed"];
     const deaths = timeseries[1]["deaths"];

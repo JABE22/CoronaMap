@@ -1,4 +1,6 @@
 
+/* global fetch, caseMap, codeMap */
+
 /**
  * ADD YOUR FUNCTIONS BELOW THIS COMMENT BLOCK
  * Include these functions from previous exercises
@@ -12,10 +14,10 @@
 /**
  * Fetches data from an URL by using window.fetch.
  * 
- * @param {type} url - URL from which the data is fetched
- * @returns {unresolved} data - FILL IN ONCE COMPLETED
+ * @param {string} url - URL from which the data is fetched
+ * @returns {object} data - FILL IN ONCE COMPLETED
  */
-let getJSON = function (url) {
+const getJSON = function (url) {
     // TODO: implement this function
     return fetch(url)
             .then(function (response) {
@@ -27,17 +29,17 @@ let getJSON = function (url) {
 /**
  * Modifies the country data so that it is compatible between different end-points.
  *
- * @param {Array<Object>} countries - All countries returned from the API
- * @param {Array<Object>} initialCodes - Countries that need to be changed
- * @returns {Object} - Map of country names to country codes
+ * @param {Array<object>} countries - All countries returned from the API
+ * @param {Array<object>} initialCodes - Countries that need to be changed
+ * @returns {object} - Map of country names to country codes
  */
-let countryCodeMap = function (countries, initialCodes) {
+const countryCodeMap = function (countries, initialCodes) {
     const countryMap = {};
     for (let i = 0; i < countries.length; i++) {
-        let name = countries[i].name.split("(")[0].trim();
+        const name = countries[i].name.split("(")[0].trim();
         countryMap[name] = countries[i].alpha3Code;
     }
-    for (let country in initialCodes) {
+    for (const country in initialCodes) {
         countryMap[country] = initialCodes[country];
     }
     //console.log(countryMap.Congo);
@@ -47,9 +49,9 @@ let countryCodeMap = function (countries, initialCodes) {
 /**
  * Fills datalist with country names
  *
- * @param {Array<Object>} codeMap - Country codes and names
+ * @param {Array<object>} codeMap - Country codes and names
  */
-let fillDataList = function (codeMap) {
+const fillDataList = function (codeMap) {
     let allCodes = "";
     for (const country in codeMap) {
         allCodes += "<option value ='" + country + "'>";
@@ -60,12 +62,12 @@ let fillDataList = function (codeMap) {
 /**
  * Gets country name based on country key value.
  * 
- * @param {type} object
- * @param {type} value
+ * @param {object} object - Struct object containing country data
+ * @param {string} value - Country code for country name selection
  * @returns {propertyNames|Array} property names
  */
 let getKey = function (object, value) {
-    let propertyNames = Object.getOwnPropertyNames(object);
+    const propertyNames = Object.getOwnPropertyNames(object);
     for (let i = 0; i < propertyNames.length; i++) {
         if (object[propertyNames[i]] === value) {
             return propertyNames[i];
@@ -76,8 +78,8 @@ let getKey = function (object, value) {
 /**
  * Contruct table row as html format.
  * 
- * @param {type} code
- * @returns {String} table row
+ * @param {string} code - Country code 
+ * @returns {string} - Table row in html format
  */
 let constructTableRow = function (code) {
     let tableRow = "";
@@ -103,14 +105,14 @@ let constructTableRow = function (code) {
 /**
  * Map cases with country codes.
  * 
- * @param {Array<Object>} cases - All corona cases returned from the API
- * @param {Array<Object>} countries - codeMap
- * @returns {Object} - Map of country codes to corona cases in the country
+ * @param {Array<object>} cases - All corona cases returned from the API
+ * @param {Array<object>} countries - codeMap
+ * @returns {object} - Map of country codes to corona cases in the country
  */
-let mapCasesWithCountrycodes = function (cases, countries) {
+const mapCasesWithCountrycodes = function (cases, countries) {
     const caseMap = {};
-    for (let country in cases) {
-        let name = country.replace(/_/g, " ");
+    for (const country in cases) {
+        const name = country.replace(/_/g, " ");
         if (countries[name] !== undefined) {
             const code = countries[name];
             caseMap[code] = {};
@@ -127,14 +129,12 @@ let mapCasesWithCountrycodes = function (cases, countries) {
 /**
  * Input handler for country search box (datalist)
  * 
- * @param {type} e
  * @returns {undefined} nothing
  */
-
-let inputHandler = function (e) {
-    let country = document.getElementById("country").value;
-    let ccode = codeMap[country];
-    let tableRow = constructTableRow(ccode);    
+const inputHandler = function () {
+    const country = document.getElementById("country").value;
+    const ccode = codeMap[country];
+    const tableRow = constructTableRow(ccode);    
     /*
     console.log(codeMap[country]);
     console.log(caseMap[codeMap[country]]);
@@ -163,8 +163,8 @@ let inputHandler = function (e) {
  * 
  * @returns {undefined} table
  */
-let printTable = function () {
-    let tbody = document.getElementsByTagName("tbody")[0];
+const printTable = function () {
+    const tbody = document.getElementsByTagName("tbody")[0];
 
     for (let i = 0; i < countryarr.length; i++) {
         tbody.innerHTML = tbody.innerHTML + countryarr[i];
@@ -174,25 +174,25 @@ let printTable = function () {
 /**
  * Parses date and returns it in specific format
  * 
- * @returns {String} date in format mm/dd/yy
+ * @returns {string} date in format mm/dd/yy
  */
-let parseDate = function () {
-    let today = new Date();
-    let date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear().toString().slice(2);
+const parseDate = function () {
+    const today = new Date();
+    const date = (today.getMonth()+1)+"/"+today.getDate()+"/"+today.getFullYear().toString().slice(2);
     
     return date;
 };
 
-let numbers1 = [4, 9, 16, 25];
-let numbers2 = [175, 50, 25, 45, 10];
+const numbers1 = [4, 9, 16, 25];
+const numbers2 = [175, 50, 25, 45, 10];
 
 /**
  * Takes square root for every number in the table given as parameter.
  * 
- * @param {type} table
- * @returns {unresolved} table with square roots
+ * @param {Array<number>} table Table with numbers
+ * @returns {Array<number>} table with square roots
  */
-let myMapFunction = function (table) {
+const myMapFunction = function (table) {
   return table.map(Math.sqrt);
 };
 
@@ -200,11 +200,11 @@ let myMapFunction = function (table) {
  * Divides first number of the list for every other number on the list
  * starting left and forwarding into right.
  * 
- * @param {type} total
- * @param {type} num
- * @returns {Number} last divided number
+ * @param {number} total First value of array
+ * @param {number} num Divider
+ * @returns {number} last divided number
  */
-let myDivideFunction = function (total, num) {
+const myDivideFunction = function (total, num) {
 	return total / num;
 };
 
