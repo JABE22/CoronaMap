@@ -3,6 +3,12 @@
   console.log("Hello from roadmap.js!");
 })();
 
+/**
+ * Insert item into "todo" list
+ * 
+ * @param {type} text
+ * @returns {undefined}
+ */
 function addListItem(text) {
   var todoList = document.getElementById('todo');
   let listItem = document.createElement('li');
@@ -27,6 +33,12 @@ function addListItem(text) {
   
 };
 
+/**
+ * Defines what happens when Add todo button pressed.
+ * 
+ * @param {type} e
+ * @returns {undefined}
+ */
 function submitHandler(e) {
   // TODO: implement this function
   e.preventDefault();
@@ -38,6 +50,13 @@ function submitHandler(e) {
   document.querySelector('input#type-input').value = "";
 }
 
+/**
+ * Handler for list items. Functionality based on state of list item. Removes list
+ * item from todo list, if it is marked as done. Otherwise marks it as done.
+ * 
+ * @param {type} e
+ * @returns {undefined}
+ */
 function listClickHandler(e) {
   // TODO: implement this function
   e.preventDefault;

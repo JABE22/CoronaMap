@@ -56,7 +56,7 @@ function fillDataList(codeMap) {
 }
 
 /**
- * 
+ * Gets country name based on country key value.
  * 
  * @param {type} object
  * @param {type} value
@@ -72,7 +72,7 @@ function getKey(object, value) {
 }
 
 /**
- * 
+ * Contruct table row as html format.
  * 
  * @param {type} code
  * @returns {String}
@@ -99,7 +99,7 @@ function constructTableRow(code) {
 }
 
 /**
- * 
+ * Map cases with country codes.
  * 
  * @param {Array<Object>} cases - All corona cases returned from the API
  * @param {Array<Object>} countries - codeMap
@@ -123,6 +123,7 @@ function mapCasesWithCountrycodes(cases, countries) {
 }
 
 /**
+ * Input handler for country search box (datalist)
  * 
  * @param {type} e
  * @returns {undefined}
@@ -154,13 +155,11 @@ function inputHandler(e) {
         document.getElementById("country").value = "";
     }
     console.log(countryarr);
-    /*setTimeout(function(){
-     printTable();
-     }, 2000);*/
 
 }
 
 /**
+ * Construct country table
  * 
  * @returns {undefined}
  */
