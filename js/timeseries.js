@@ -10,15 +10,15 @@ function mapTimeseries(timeseries, countryMap) {
     const confirmed = timeseries[0]["confirmed"];
     const deaths = timeseries[1]["deaths"];
 
-    for (var date in confirmed[0]) {
+    for (let date in confirmed[0]) {
         if (date === "Province/State" || date === "Country/Region" || 
             date === "Lat" || date === "Long") {
             continue;
         }
         timeMap[date] = {};
     }
-    for (var date in timeMap) {
-        for (var i = 0; i < confirmed.length; i++) {
+    for (date in timeMap) {
+        for (let i = 0; i < confirmed.length; i++) {
             const code = countryMap[confirmed[i]["Country/Region"].replace(/_/g, " ")];
             if (timeMap[date][code] === undefined) {
                 timeMap[date][code] = {};

@@ -93,7 +93,7 @@ const sayHello = (text) => console.log(text);
  */
 const mapNeighbours = (rawNeighbours) => {
     let neighbours = {};
-    for (var item in rawNeighbours) {
+    for (let item in rawNeighbours) {
         neighbours[rawNeighbours[item]["alpha3Code"]] = rawNeighbours[item]["borders"];
     }
     return neighbours;

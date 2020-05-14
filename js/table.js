@@ -32,11 +32,11 @@ function getJSON(url) {
  */
 function countryCodeMap(countries, initialCodes) {
     const countryMap = {}
-    for (var i = 0; i < countries.length; i++) {
+    for (let i = 0; i < countries.length; i++) {
         let name = countries[i].name.split("(")[0].trim();
         countryMap[name] = countries[i].alpha3Code;
     }
-    for (var country in initialCodes) {
+    for (let country in initialCodes) {
         countryMap[country] = initialCodes[country];
     }
     //console.log(countryMap.Congo);
@@ -64,8 +64,8 @@ function fillDataList(codeMap) {
  * @returns {propertyNames|Array}
  */
 function getKey(object, value) {
-    var propertyNames = Object.getOwnPropertyNames(object);
-    for (var i = 0; i < propertyNames.length; i++) {
+    let propertyNames = Object.getOwnPropertyNames(object);
+    for (let i = 0; i < propertyNames.length; i++) {
         if (object[propertyNames[i]] === value) {
             return propertyNames[i];
         }
@@ -108,7 +108,7 @@ function constructTableRow(code) {
  */
 function mapCasesWithCountrycodes(cases, countries) {
     const caseMap = {}
-    for (var country in cases) {
+    for (let country in cases) {
         let name = country.replace(/_/g, " ");
         if (countries[name] !== undefined) {
             const code = countries[name];
@@ -167,7 +167,7 @@ function inputHandler(e) {
 function printTable() {
     let tbody = document.getElementsByTagName("tbody")[0];
 
-    for (var i = 0; i < countryarr.length; i++) {
+    for (let i = 0; i < countryarr.length; i++) {
         tbody.innerHTML = tbody.innerHTML + countryarr[i];
     }
 }
