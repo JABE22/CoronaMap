@@ -5,7 +5,7 @@
  * @param {Array<Object>} countryMap - codeMap
  * @returns {Object} Time map
  */
-function mapTimeseries(timeseries, countryMap) {
+var mapTimeseries = function (timeseries, countryMap) {
     const timeMap = {};
     const confirmed = timeseries[0]["confirmed"];
     const deaths = timeseries[1]["deaths"];
@@ -33,4 +33,4 @@ function mapTimeseries(timeseries, countryMap) {
     }
     //console.log(timeMap["5/4/20"]["FIN"]);
     return timeMap;
-}
+};
