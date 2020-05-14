@@ -1,3 +1,4 @@
+
 /**
  * ADD YOUR FUNCTIONS BELOW THIS COMMENT BLOCK
  * Include these functions from previous exercises
@@ -31,7 +32,7 @@ function getJSON(url) {
  * @returns {Object} - Map of country names to country codes
  */
 function countryCodeMap(countries, initialCodes) {
-    const countryMap = {}
+    const countryMap = {};
     for (let i = 0; i < countries.length; i++) {
         let name = countries[i].name.split("(")[0].trim();
         countryMap[name] = countries[i].alpha3Code;
@@ -51,7 +52,7 @@ function countryCodeMap(countries, initialCodes) {
 function fillDataList(codeMap) {
     let allCodes = "";
     for (const country in codeMap) {
-        allCodes += "<option value ='" + country + "'>"
+        allCodes += "<option value ='" + country + "'>";
     }
     document.getElementById("searchresults").innerHTML = allCodes;
 }
@@ -107,12 +108,12 @@ function constructTableRow(code) {
  * @returns {Object} - Map of country codes to corona cases in the country
  */
 function mapCasesWithCountrycodes(cases, countries) {
-    const caseMap = {}
+    const caseMap = {};
     for (let country in cases) {
         let name = country.replace(/_/g, " ");
         if (countries[name] !== undefined) {
             const code = countries[name];
-            caseMap[code] = {}
+            caseMap[code] = {};
             caseMap[code]["confirmed"] = cases[country]["confirmed"];
             caseMap[code]["deaths"] = cases[country]["deaths"];
             caseMap[code]["recovered"] = cases[country]["recovered"];

@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="./lib/bootstrap.min.css">
     <!-- Own stylesheet -->
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link rel="shortcut icon" href="#" />
 
     <title>Corona</title>
   </head>
@@ -85,14 +86,17 @@
     </script>
     <!-- Own Javascript -->
     <script src="./js/config.js"></script>
-    <script src="./js/index.js"></script>
     <script src="./js/table.js"></script>
+    <script src="./js/index.js"></script>
+
     <script src="./js/datamapping.js"></script>
     <script src="./js/timeseries.js"></script>
 
     <script>
-              stopTimeseries();
-              initialize();
+              function stop() {
+                  clearInterval(inte);
+              };
     </script>
+
   </body>
 </html>

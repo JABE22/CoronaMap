@@ -4,17 +4,7 @@
  */
 
 // Global variables for basic corona map functionality
-let codeMap, caseMap, neighMap, timeMap;
-let inte;
-
-/**
- * Stops time series. By default, time series will be off.
- * 
- * @returns {undefined}
- */
-function stopTimeseries() {
-    clearInterval(inte);
-}
+let codeMap, caseMap, neighMap, timeMap, inte;
 
 /**
  * The core of Corona Web App functionality. Initializations for Corona Map 
@@ -22,7 +12,7 @@ function stopTimeseries() {
  * 
  * @returns {undefined}
  */
-async function initialize() {
+(async () => {
     const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
     codeMap = countryCodeMap(countries, INITIAL_CODES);
     fillDataList(codeMap);
@@ -41,7 +31,7 @@ async function initialize() {
     document.getElementById("timeseries").onclick = function () {
                                                           timeseriesFills(timeMap);
                                                      };
-}
+})();
 
 /* Countries that have some anomalities in their names (such as special chars, 
  * brackets, or multiple variants) are collected here */
@@ -72,7 +62,7 @@ const INITIAL_CODES = {
     Burma: "MMR",
     Syria: "SYR",
     Laos: "LAO",
-    Eswatini: "SWZ",
+    Eswatini: "SWZ"
 };
 
 const DEFAULT_FILL = "#EEEEEE";

@@ -9,8 +9,9 @@ function mapTimeseries(timeseries, countryMap) {
     const timeMap = {};
     const confirmed = timeseries[0]["confirmed"];
     const deaths = timeseries[1]["deaths"];
+    let date;
 
-    for (let date in confirmed[0]) {
+    for (date in confirmed[0]) {
         if (date === "Province/State" || date === "Country/Region" || 
             date === "Lat" || date === "Long") {
             continue;

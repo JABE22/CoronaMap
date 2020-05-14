@@ -2,7 +2,7 @@
 /**
  * Function updates d3 map to show the current corona situation
  * of the selected country and the neighbouring countries of that country.
- * Updates color fill of the coutnries to the d3 map.
+ * Updates color fill of the countries to the d3 map.
  * 
  * @param {type} countryCode Receives countrycode from user input in table
  * @returns {undefined}
@@ -122,7 +122,7 @@ function timeseriesFills(ts) {
         timeseriesHelper(ts[keys[i]], maxdate);
         document.getElementById("date").innerHTML = keys[i].toString();
 
-    }, 1000);
+    }, 300);
     //Inner function to stop the intervalling
 }
 
