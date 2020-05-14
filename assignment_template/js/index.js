@@ -7,11 +7,11 @@ const sayHello = (text) => console.log(text);
 
 // Self-invoked function to avoid polluting global scope
 (() => {
-  const helloIndex = "Hello from index.js!";
-  sayHello(helloIndex);
-  console.log(
-    `This is how you can use the configuration object: ${config.baseURL}`
-  );
+    const helloIndex = "Hello from index.js!";
+    sayHello(helloIndex);
+    console.log(
+            `This is how you can use the configuration object: ${config.baseURL}`
+            );
 })();
 
 // Countries that have some anomalities in their names (such as special chars, brackets, or multiple variants) are collected here
@@ -21,36 +21,68 @@ const sayHello = (text) => console.log(text);
  * @type type
  */
 const INITIAL_CODES = {
-  Brunei: "BRN",
-  "Mainland China": "CHN",
-  US: "USA",
-  Iran: "IRN",
-  "South Korea": "KOR",
-  "Korea, South": "KOR",
-  Korea: "KOR",
-  "Taiwan*": "TWN",
-  UK: "GBR",
-  "United Kingdom": "GBR",
-  Czechia: "CZE",
-  Russia: "RUS",
-  "United Arab Emirates": "UAE",
-  Macau: "MAC",
-  "North Macedonia": "MKD",
-  Venezuela: "VEN",
-  Vietnam: "VNM",
-  "Cote d'Ivoire": "CIV",
-  "West Bank and Gaza": "PSE",
-  Kosovo: "KOS",
-  "Congo (Kinshasa)": "COD",
-  "Congo (Brazzaville)": "COG",
-  Tanzania: "TZA",
-  Burma: "MMR",
-  Syria: "SYR",
-  Laos: "LAO",
-  Eswatini: "SWZ",
+    Brunei: "BRN",
+    "Mainland China": "CHN",
+    US: "USA",
+    Iran: "IRN",
+    "South Korea": "KOR",
+    "Korea, South": "KOR",
+    Korea: "KOR",
+    "Taiwan*": "TWN",
+    UK: "GBR",
+    "United Kingdom": "GBR",
+    Czechia: "CZE",
+    Russia: "RUS",
+    "United Arab Emirates": "UAE",
+    Macau: "MAC",
+    "North Macedonia": "MKD",
+    Venezuela: "VEN",
+    Vietnam: "VNM",
+    "Cote d'Ivoire": "CIV",
+    "West Bank and Gaza": "PSE",
+    Kosovo: "KOS",
+    "Congo (Kinshasa)": "COD",
+    "Congo (Brazzaville)": "COG",
+    Tanzania: "TZA",
+    Burma: "MMR",
+    Syria: "SYR",
+    Laos: "LAO",
+    Eswatini: "SWZ",
 };
 
 const DEFAULT_FILL = "#EEEEEE";
+
+let codeMap, caseMap, neighMap, timeMap;
+var inte;
+
+function stop() {
+    clearInterval(inte);
+}
+
+async function initialize() {
+    const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
+    codeMap = countryCodeMap(countries, INITIAL_CODES);
+    fillDataList(codeMap);
+    console.log("codemap");
+    console.log(codeMap);
+    const neighboursMapped = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours');
+    neighMap = mapNeighbours(neighboursMapped);
+    console.log(neighboursMapped);
+    const cases = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona');
+    caseMap = mapCasesWithCountrycodes(cases, codeMap);
+    initialFills(caseMap);
+    const timeseries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona/timeseries/');
+    timeMap = mapTimeseries(timeseries, codeMap);
+    document.getElementById('country').addEventListener('input', inputHandler);
+    document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
+    document.getElementById("timeseries").onclick = function () {
+        timeseriesFills(timeMap);
+    };
+}
+
+(async () => {
+    
+})();
 
 /**
  * mapNeighbours arrow function returns neighbours of a country
@@ -61,11 +93,11 @@ const DEFAULT_FILL = "#EEEEEE";
  * @returns an object where keys are three-char country codes (alpha3codes), and the values are neighbour country codes as an array.
  */
 const mapNeighbours = (rawNeighbours) => {
-	let neighbours = {};
-	for (item in rawNeighbours) {
-		neighbours[rawNeighbours[item]["alpha3Code"]] = rawNeighbours[item]["borders"];
-	}
-	return neighbours;
+    let neighbours = {};
+    for (item in rawNeighbours) {
+        neighbours[rawNeighbours[item]["alpha3Code"]] = rawNeighbours[item]["borders"];
+    }
+    return neighbours;
 };
 
 const int = (str) => Number.parseInt(str);
@@ -83,20 +115,20 @@ const int = (str) => Number.parseInt(str);
  * @return {color} a HSL color constructed based on confirmed and deaths
  */
 const getColor = (confirmed, deaths) => {
-  const denominator = confirmed + deaths == 0 ? 1 : confirmed + deaths;
-  const nominator = deaths ? deaths : 0;
-  const hue = int(240 + 120 * nominator / denominator);
-  const saturation = 100; //constant
+    const denominator = confirmed + deaths == 0 ? 1 : confirmed + deaths;
+    const nominator = deaths ? deaths : 0;
+    const hue = int(240 + 120 * nominator / denominator);
+    const saturation = 100; //constant
 
-  let weight = int(7 * Math.log(confirmed + 20 * deaths));
-  weight = weight ? (weight > 100 ? 95 : weight) : 0;
+    let weight = int(7 * Math.log(confirmed + 20 * deaths));
+    weight = weight ? (weight > 100 ? 95 : weight) : 0;
 
-  let lightness = 95 - weight;
-  lightness = lightness < 0 ? 0 : lightness;
-  return `hsl(${hue}, ${saturation}, ${lightness})`;
+    let lightness = 95 - weight;
+    lightness = lightness < 0 ? 0 : lightness;
+    return `hsl(${hue}, ${saturation}, ${lightness})`;
 };
 
-var map = new Datamap({element: document.getElementById('map-container'), 
-                       projection: 'mercator', 
-                       fills: {defaultFill: DEFAULT_FILL}});
+var map = new Datamap({element: document.getElementById('map-container'),
+    projection: 'mercator',
+    fills: {defaultFill: DEFAULT_FILL}});
 //console.log(mapNeighbours);

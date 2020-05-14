@@ -90,35 +90,9 @@
     <script src="./js/datamapping.js"></script>
     <script src="./js/timeseries.js"></script>
 
-
     <script>
-              let codeMap, caseMap, neighMap, timeMap;
-			  var inte;
-			  
-			  function stop() {
-				clearInterval(inte);
-			  };
-			  
-              (async () => {
-                  const countries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/countries');
-                  codeMap = countryCodeMap(countries, INITIAL_CODES);
-                  fillDataList(codeMap);
-                  console.log("codemap");
-                  console.log(codeMap);
-                  const neighboursMapped = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours');
-                  neighMap = mapNeighbours(neighboursMapped);
-                  console.log(neighboursMapped);
-                  const cases = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona');
-                  caseMap = mapCasesWithCountrycodes(cases, codeMap);
-                  initialFills(caseMap);
-                  const timeseries = await getJSON('https://tie-lukioplus.rd.tuni.fi/corona/api/corona/timeseries/');
-                  timeMap = mapTimeseries(timeseries, codeMap);
-                  document.getElementById('country').addEventListener('input', inputHandler);
-                  document.getElementById('countryform').addEventListener('submit', (e) => e.preventDefault());
-                  document.getElementById("timeseries").onclick = function () {
-					timeseriesFills(timeMap);
-				  };
-              })();
+              stop();
+              initialize();
     </script>
   </body>
 </html>

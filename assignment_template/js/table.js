@@ -21,6 +21,7 @@ function getJSON(url) {
                 return response.json();
             });
 }
+
 /**
  * Modifies the country data so that it is compatible between different end-points.
  *
@@ -40,6 +41,7 @@ function countryCodeMap(countries, initialCodes) {
     //console.log(countryMap.Congo);
     return countryMap;
 }
+
 /**
  * Fills datalist with country names
  *
@@ -78,7 +80,7 @@ function getKey(object, value) {
 function constructTableRow(code) {
     var tableRow = "";
     
-    if (caseMap[code] != undefined) {
+    if (caseMap[code] !== undefined) {
         tableRow = "<tr>\n\
                         <td>" + caseMap[code].country + "</td>\n\
                         <td>" + caseMap[code].confirmed + "</td>\n\
@@ -107,7 +109,7 @@ function mapCasesWithCountrycodes(cases, countries) {
     const caseMap = {}
     for (country in cases) {
         let name = country.replace(/_/g, " ");
-        if (countries[name] != undefined) {
+        if (countries[name] !== undefined) {
             const code = countries[name];
             caseMap[code] = {}
             caseMap[code]["confirmed"] = cases[country]["confirmed"];
@@ -147,6 +149,8 @@ function inputHandler(e) {
         stop(inte);
         colorNeighbors(ccode);
         printTable();
+
+        document.getElementById("date").innerHTML = parseDate();
         document.getElementById("country").value = "";
     }
     console.log(countryarr);
@@ -166,6 +170,18 @@ function printTable() {
     for (i = 0; i < countryarr.length; i++) {
         tbody.innerHTML = tbody.innerHTML + countryarr[i];
     }
+}
+
+/**
+ * Parses date and returns it in specific format
+ * 
+ * @returns {String} date in format mm/dd/yy
+ */
+function parseDate() {
+    var today = new Date();
+    var date = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear().toString().slice(2);
+    
+    return date;
 }
 
 var countryarr = [];
