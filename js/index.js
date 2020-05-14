@@ -235,7 +235,7 @@ let codeMap, caseMap, neighMap, timeMap;
  * 
  * @returns {undefined}
  */
-(async () => {
+const initialize = async function () {
     const countries = await getJSON("https://tie-lukioplus.rd.tuni.fi/corona/api/countries");
     codeMap = countryCodeMap(countries, INITIAL_CODES);
     fillDataList(codeMap);
@@ -254,7 +254,7 @@ let codeMap, caseMap, neighMap, timeMap;
     document.getElementById("timeseries").onclick = function () {
                                                           timeseriesFills(timeMap);
                                                      };
-})();
+};
 
 /* Countries that have some anomalities in their names (such as special chars, 
  * brackets, or multiple variants) are collected here */
@@ -477,7 +477,7 @@ const timeseriesFills = function (ts) {
                 }
                 timeseriesHelper(ts[keys[i]], maxdate);
                 document.getElementById("date").innerHTML = keys[i].toString();
-    }, 300); // Called about three times per second with iterated key
+    }, 1000); // Called about three times per second with iterated key
 };
 
 const today = new Date();
