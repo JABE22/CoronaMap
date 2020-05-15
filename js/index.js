@@ -501,7 +501,7 @@ const mapTimeseries = function (timeseries, countryMap) {
  * 
  * @returns {undefined}
  */
-function stopTimeseries () {
+const stopTimeseries = function () {
     clearInterval(window.inte);
 };
 
