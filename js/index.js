@@ -148,7 +148,7 @@ const inputHandler = function () {
         } else {
             countryarr.unshift(tableRow);
         }
-        stop(inte);
+        stopTimeseries(inte);
         colorNeighbors(ccode);
         printTable();
 
@@ -444,7 +444,7 @@ const timeseriesFills = function (ts) {
                 console.log(keys[i]);
                 //If all dates have been looped thru, stop
                 if (typeof keys[i] === "undefined") {
-                    stop();
+                    stopTimeseries();
                 }
                 timeseriesHelper(ts[keys[i]], maxdate);
                 document.getElementById("date").innerHTML = keys[i].toString();
@@ -496,10 +496,16 @@ const mapTimeseries = function (timeseries, countryMap) {
     return timeMap;
 };
 
-
-function stop () {
+/**
+ * Stops time series
+ * 
+ * @returns {undefined}
+ */
+function stopTimeseries () {
     clearInterval(window.inte);
 };
+
+stopTimeseries();
 
 // Global variables for basic corona map functionality
 let codeMap, caseMap, neighMap, timeMap;
