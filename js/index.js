@@ -501,7 +501,7 @@ const stop = function () {
     clearInterval(window.inte);
 };
 
-stop;
+stop();
 
 // Global variables for basic corona map functionality
 let codeMap, caseMap, neighMap, timeMap;
