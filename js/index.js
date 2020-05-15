@@ -226,35 +226,6 @@ const countryarr = [];
  * 
  */
 
-// Global variables for basic corona map functionality
-let codeMap, caseMap, neighMap, timeMap;
-
-/**
- * The core of Corona Web App functionality. Initializations for Corona Map 
- * functionality.
- * 
- * @returns {undefined}
- */
-const initialize = async function () {
-    const countries = await getJSON("https://tie-lukioplus.rd.tuni.fi/corona/api/countries");
-    codeMap = countryCodeMap(countries, INITIAL_CODES);
-    fillDataList(codeMap);
-    console.log("codemap");
-    console.log(codeMap);
-    const neighboursMapped = await getJSON("https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours");
-    neighMap = mapNeighbours(neighboursMapped);
-    console.log(neighboursMapped);
-    const cases = await getJSON("https://tie-lukioplus.rd.tuni.fi/corona/api/corona");
-    caseMap = mapCasesWithCountrycodes(cases, codeMap);
-    initialFills(caseMap);
-    const timeseries = await getJSON("https://tie-lukioplus.rd.tuni.fi/corona/api/corona/timeseries/");
-    timeMap = mapTimeseries(timeseries, codeMap);
-    document.getElementById("country").addEventListener("input", inputHandler);
-    document.getElementById("countryform").addEventListener("submit", (e) => e.preventDefault());
-    document.getElementById("timeseries").onclick = function () {
-        timeseriesFills(timeMap);
-    };
-};
 
 /* Countries that have some anomalities in their names (such as special chars, 
  * brackets, or multiple variants) are collected here */
@@ -525,9 +496,39 @@ const mapTimeseries = function (timeseries, countryMap) {
     return timeMap;
 };
 
+
 const stop = function () {
     clearInterval(window.inte);
 };
 
-stop();
-initialize();
+stop;
+
+// Global variables for basic corona map functionality
+let codeMap, caseMap, neighMap, timeMap;
+
+/**
+ * The core of Corona Web App functionality. Initializations for Corona Map 
+ * functionality.
+ * 
+ * @returns {undefined}
+ */
+( async () => {
+    const countries = await getJSON("https://tie-lukioplus.rd.tuni.fi/corona/api/countries");
+    codeMap = countryCodeMap(countries, INITIAL_CODES);
+    fillDataList(codeMap);
+    console.log("codemap");
+    console.log(codeMap);
+    const neighboursMapped = await getJSON("https://tie-lukioplus.rd.tuni.fi/corona/api/neighbours");
+    neighMap = mapNeighbours(neighboursMapped);
+    console.log(neighboursMapped);
+    const cases = await getJSON("https://tie-lukioplus.rd.tuni.fi/corona/api/corona");
+    caseMap = mapCasesWithCountrycodes(cases, codeMap);
+    initialFills(caseMap);
+    const timeseries = await getJSON("https://tie-lukioplus.rd.tuni.fi/corona/api/corona/timeseries/");
+    timeMap = mapTimeseries(timeseries, codeMap);
+    document.getElementById("country").addEventListener("input", inputHandler);
+    document.getElementById("countryform").addEventListener("submit", (e) => e.preventDefault());
+    document.getElementById("timeseries").onclick = function () {
+        timeseriesFills(timeMap);
+    };
+})();
