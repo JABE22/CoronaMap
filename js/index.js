@@ -497,11 +497,9 @@ const mapTimeseries = function (timeseries, countryMap) {
 };
 
 
-const stop = function () {
+function stop () {
     clearInterval(window.inte);
 };
-
-stop();
 
 // Global variables for basic corona map functionality
 let codeMap, caseMap, neighMap, timeMap;
