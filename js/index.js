@@ -1,5 +1,14 @@
-// TABLE.JS
-/* global fetch, caseMap, codeMap */
+
+/**
+ * JavaScript for Corona Map in index.html
+ * 
+ * NOTE: This index.js file contains four(4) compined JavaScript file. This we had
+ * to do, because JSDoc lint grader in plussa does not allow function calling located
+ * in another previously declared functions. 
+ * This file is absolutely too long but we had originally functions separated
+ * in index.js, table.js, timeseries.js and datamapping.js files. You can see
+ * filenames written capitalized letters indicating that file structure.
+ */
 
 /**
  * ADD YOUR FUNCTIONS BELOW THIS COMMENT BLOCK
@@ -10,6 +19,11 @@
  *   - constructTableRow(code)
  *   - getKey(object, value) (this is needed by constructTableRow(code) function)
  */
+
+
+
+// TABLE.JS
+/* global fetch, caseMap, codeMap */
 
 /**
  * Fetches data from an URL by using window.fetch.
@@ -218,14 +232,7 @@ const countryarr = [];
 
 
 // INDEX.JS
-
 /* global inputHandler, config, getJSON */
-
-/**
- * JavaScript for Corona Map in index.html
- * 
- */
-
 
 /* Countries that have some anomalities in their names (such as special chars, 
  * brackets, or multiple variants) are collected here */
